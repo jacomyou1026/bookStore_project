@@ -1,0 +1,148 @@
+--bookuser
+CREATE TABLE  "BOOK_USER" 
+   ("ID" VARCHAR2(30) NOT NULL ENABLE, 
+   "NAME" VARCHAR2(30) NOT NULL ENABLE, 
+   "PWD" VARCHAR2(30) NOT NULL ENABLE, 
+   "NICKNAME" VARCHAR2(30) NOT NULL ENABLE, 
+   "GENDER" CHAR(6), 
+   "JUMIN1" NUMBER(*,0) NOT NULL ENABLE, 
+   "JUMIN2" NUMBER(*,0) NOT NULL ENABLE, 
+   "POSTCODE" NUMBER, 
+   "ADDRESS1" VARCHAR2(50), 
+   "ADDRESS2" VARCHAR2(50), 
+   "EMAIL" VARCHAR2(30), 
+   "SHOP_POINT" NUMBER(*,0), 
+   "MONEY" NUMBER(*,0), 
+   "TEL1" VARCHAR2(20), 
+   "TEL2" VARCHAR2(20), 
+   "TEL3" VARCHAR2(20), 
+    PRIMARY KEY ("ID") ENABLE, 
+    UNIQUE ("NICKNAME") ENABLE
+   ) ;
+
+--book
+CREATE TABLE book (
+   bookNum int NOT NULL,
+   subject VARCHAR2(300) NOT NULL,
+   author VARCHAR2(300) NOT NULL,
+   publishDate date NULL,
+   publisher VARCHAR2(300) NULL,
+   price int NOT NULL,
+   intro clob NULL,
+   stock int NOT NULL,
+   img VARCHAR2(300) NULL,
+   categoryNum int NOT NULL,
+   bestCk int default 0,
+   FOREIGN KEY (categoryNum) REFERENCES category (categoryNum),
+   primary key(bookNum)
+);
+
+--book_purchase
+CREATE TABLE  "BOOK_PURCHASE" 
+   (   "PURCHASENUM" NUMBER(*,0) NOT NULL ENABLE, 
+   "ID" VARCHAR2(30) NOT NULL ENABLE, 
+   "REGDATE" DATE, 
+   "SHOPNUM" NUMBER NOT NULL ENABLE, 
+   "BOOKCNT" NUMBER, 
+   "BOOKNUM" NUMBER, 
+   "PRICE" NUMBER, 
+   "DELIVERYSEP" NUMBER DEFAULT 0, 
+    PRIMARY KEY ("PURCHASENUM") ENABLE
+   ) ;ALTER TABLE  "BOOK_PURCHASE" ADD FOREIGN KEY ("ID")
+     REFERENCES  "BOOK_USER" ("ID") ENABLE;
+
+--category
+create table category(
+    tier number(1) not null,
+    cateName varchar2(50) not null,
+    categoryNum int not null,
+    cateParent int ,
+    primary key(categoryNum),
+    foreign key(cateParent) references category(categoryNum) 
+);
+
+--delivery
+CREATE TABLE  "DELIVERY" 
+   (   "DELIVERYNUM" NUMBER, 
+   "ID" VARCHAR2(30), 
+   "BOOKNUM" NUMBER, 
+   "BOOKCNT" NUMBER, 
+   "PRICE" NUMBER, 
+   "DELIVERYPOSTCODE" NUMBER, 
+   "DELIVERYADDRESS1" VARCHAR2(4000), 
+   "DELIVERYADDRESS2" VARCHAR2(50), 
+   "DELIVERYTEL1" VARCHAR2(30), 
+   "DELIVERYTEL2" VARCHAR2(30), 
+   "DELIVERYTEL3" VARCHAR2(30), 
+   "DELREGDATE" DATE DEFAULT sysdate, 
+   "DELIVERYNAME" VARCHAR2(30), 
+    PRIMARY KEY ("DELIVERYNUM") ENABLE
+   ) ;ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("ID")
+     REFERENCES  "BOOK_USER" ("ID") ENABLE;ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("BOOKNUM")
+     REFERENCES  "BOOK" ("BOOKNUM") ENABLE;
+
+--shopping cart
+CREATE TABLE  "SHOPPING_CART" 
+   (   "SHOPNUM" NUMBER(*,0) NOT NULL ENABLE, 
+   "ID" VARCHAR2(30) NOT NULL ENABLE, 
+   "BOOKNUM" NUMBER(*,0) NOT NULL ENABLE, 
+   "REGDATE_CART" DATE, 
+   "BOOKCNT" NUMBER DEFAULT 1, 
+    PRIMARY KEY ("SHOPNUM") ENABLE
+   ) ;ALTER TABLE  "SHOPPING_CART" ADD FOREIGN KEY ("BOOKNUM")
+     REFERENCES  "BOOK" ("BOOKNUM") ENABLE;
+
+--jungotable
+CREATE TABLE Jungobook (
+   JbookNum int NOT NULL,
+   Jsubject VARCHAR2(100) NOT NULL,
+   Jauthor VARCHAR2(100) NOT NULL,
+   JpublishDate date NULL,
+   Jpublisher VARCHAR2(100) NULL,
+   Jprice int NOT NULL,
+   Jintro clob NULL,
+   Jstock int NOT NULL,
+   Jimg VARCHAR2(100) NULL,
+   categoryNum int NOT NULL,
+   ID VARCHAR2(30) NOT NULL,
+   FOREIGN KEY (categoryNum) REFERENCES category (categoryNum),
+   FOREIGN KEY (Id) REFERENCES book_user (Id),
+   primary key(JbookNum)
+);
+
+--jungoreply
+create table jungoreply(
+Jrno number not null,
+JbookNum number not null,
+JreplyContent varchar2(1000) not null,
+JreplyRegdate date default sysdate,
+Id varchar2(40) not null,
+primary key(jrno),
+constraint rs foreign key (Id)
+   references BOOK_USER(Id) on delete cascade,
+constraint ra foreign key(JbookNum)
+   references jungobook(JbookNum) on delete cascade
+
+);
+
+--review
+CREATE TABLE review (
+	reviewNum int NOT NULL,
+	id VARCHAR2(30) NOT NULL,
+	content CLOB NULL,
+	ip VARCHAR2(50) NULL,
+	regdate date NULL,
+	ref NUMBER(4) NULL,
+	step NUMBER(4) NULL,
+	depth NUMBER(4) NULL,
+	bookNum int not null,
+	rating int,
+	primary key(reviewNum),
+	foreign key(id) references book_user(id),
+	foreign key(bookNum) references book(bookNum)
+);
+
+create sequence jungoreply_seq;
+create sequence jungobook_seq
+create sequence bookseq;
+create sequence seq_review_idx;

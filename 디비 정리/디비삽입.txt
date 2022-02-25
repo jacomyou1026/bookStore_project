@@ -1,0 +1,82 @@
+ 
+//중고책
+
+           insert into jungobook(JbookNum,Jsubject,Jauthor,JpublishDate,Jpublisher,Jprice,Jintro,Jstock,Jimg,categoryNum,id)
+           values (book_seq.NEXTVAL, '한국소설', '나태주', sysdate, '지해',9000,'블랙핑크(BLACKPINK)의 지수와 세계적인 보컬 그룹인 방탄소년단(BTS)의 RM, 송혜교와 박보검 등은 물론 전국민의 애송시인 [풀꽃]이 수록되어있는 나태주 시집 [꽃을 보듯 너를 본다]. “자세히 보아야/',9,'img',101001,'feel');
+            
+  //일반책
+            insert into BOOK(bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum)
+            values (book_seq.NEXTVAL, '한국소설', '나태주', sysdate, '지해',9000,'블랙핑크(BLACKPINK)의 지수와 세계적인 보컬 그룹인 방탄소년단(BTS)의 RM, 송혜교와 박보검 등은 물론 전국민의 애송시인 [풀꽃]이 수록되어있는 나태주 시집 [꽃을 보듯 너를 본다]. “자세히 보아야/',9,'img',101001);
+            
+
+
+
+-- 데이터 삽입
+insert into category(tier, cateName, categoryNum) values (1, '국내', '100000');
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '소설', '101000','100000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '한국소설', '101001','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '영미소설', '101002','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '일본소설', '101003','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '중국소설', '101004','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '러시아소설', '101005','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '프랑스소설', '101006','101000'); 
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '독일소설', '101007','101000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (2, '시/에세이', '102000','100000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '한국시', '102001','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '해외시', '102002','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '테마에세이', '102003','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '나라별 에세이', '102004','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '인물/자전적 에세이', '102005','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '청소년 시/에세이', '102006','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '시/에세이문고', '102007','102000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (2, '경제/경영', '103000','100000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경영일반', '103001','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경영이론', '103002','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경영관리', '103003','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경영전략', '103004','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경제일반', '103005','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경제이론', '103006','103000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경제실무', '103007','103000');    
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '인문', '104000','100000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '인문학 일반', '104001','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '심리학', '104002','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '교육학', '104003','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '유아교육', '104004','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '특수교육', '104005','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '임용고시', '104006','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '철학', '104007','104000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (2, 'IT', '105000','100000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '컴퓨터공학', '105001','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, 'IT일반', '105002','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, 'OS', '105003','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '네트워크', '105004','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '보안/해킹', '105005','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '데이터베이스', '105006','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '개발방법론', '105007','105000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (2, '요리', '106000','100000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '요리일반', '106001','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '요리에세이', '106002','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '테마별요리', '106003','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '베이킹/간식', '106004','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '계절요리', '106005','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '재료별요리', '106006','106000');
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '나라별요리', '106007','106000');
+  
+
+insert into category(tier, cateName, categoryNum) values (1, '국외', '200000');
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '문학', '201000','200000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '소설', '201001','201000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '시', '201002','201000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '희곡', '201003','201000');    
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '인문/사회', '202000','200000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '교양', '202001','202000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '철학', '202002','202000');    
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '경제/경영', '203000','200000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경제학', '203001','203000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '경영학', '203002','203000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '투자', '203003','203000');    
+    insert into category(tier, cateName, categoryNum, cateParent) values (2, '과학/기술', '204000','200000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '교양과학', '204001','204000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '물리학', '204002','204000');    
+        insert into category(tier, cateName, categoryNum, cateParent) values (3, '수학', '204003','204000');  
+ 
