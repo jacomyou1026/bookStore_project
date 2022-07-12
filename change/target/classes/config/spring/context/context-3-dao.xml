@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+   <!-- 
+   	<context:component-scan base-package="service"/>
+        <context:component-scan base-package="vo"/>
+        <context:component-scan base-package="dao"/>
+        <context:component-scan base-package="utils"/>
+
+ -->
+ 		 <bean id="user_dao" class="dao.UserDAO">
+			<property name="sqlSession" ref="sqlSessionBean"/>	
+		</bean>
+			
+		<bean id="book_dao" class="dao.BookDAOImpl">
+			<property name="sqlSession" ref="sqlSessionBean"/>	
+		</bean>
+		
+		<bean id="book_serviceBean" class="service.BookServiceImpl">
+			<constructor-arg ref="book_dao"/>
+		</bean>	
+		
+		<bean id="jungobook_dao" class="dao.JungoBookDAOImpl">
+			<property name="sqlSession" ref="sqlSessionBean"/>	
+		</bean>
+		
+		<bean id="jungobook_serviceBean" class="service.JungoBookServiceImpl">
+			<constructor-arg ref="jungobook_dao"/>
+		</bean>
+		
+		<bean id="jungoreply_dao" class="dao.JungoReplyDAOImpl">
+			<property name="sqlSession" ref="sqlSessionBean"/>	
+		</bean>
+		
+		<bean id="jungoreply_serviceBean" class="service.JungoReplyServiceImpl">
+			<constructor-arg ref="jungoreply_dao"/>
+		</bean>		 
+         <bean id="review_dao" class="dao.ReviewDAO">
+			<property name="sqlSession" ref="sqlSessionBean"/>	
+		</bean>
+				<bean id="review_vo" class="vo.ReviewVO">	
+		</bean>
+		
+		
+	<bean id="book_purchase_dao" class="dao.BookPurchaseDAO">
+		<property name="sqlSession" ref="sqlSessionBean">
+		</property>
+	</bean>
+		
+	<bean id="order_dao" class="dao.OrderDAO">
+		<property name="sqlSession" ref="sqlSessionBean">
+		</property>
+	</bean>
+		
+	<bean id="shoppingCart_dao" class="dao.ShoppingCartDAO">
+		<property name="sqlSession" ref="sqlSessionBean">
+		</property>
+
+	</bean>
+			
+	<bean id="shoppingCart_vo" class="vo.ShoppingCartVO">
+	</bean>
+	
+	<bean id="DeliveryVO" class="vo.DeliveryVO">
+	</bean>
+	
+
+</beans>

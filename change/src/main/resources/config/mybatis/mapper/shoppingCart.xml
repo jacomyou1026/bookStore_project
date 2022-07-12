@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shopping">
+
+	<!--  장바구니 담기 -->
+	<insert id="insert_basket" parameterType="vo.ShoppingCartVO">
+		INSERT INTO shopping_cart (ID,regdate_cart,SHOPNUM,BOOKCNT,BOOKNUM) 
+		values(#{id},sysdate,seq_shopping_cart_idx.nextVal,#{bookCnt},#{bookNum}) 
+	</insert>
+	
+	<!--  book+shoppingcart table -->
+	<select id="list2" resultType="vo.OrderVO" parameterType="String">
+		SELECT * FROM SHOPPING_CART sc 
+		JOIN BOOK b ON sc.booknum = b.BOOKNUM
+		JOIN CATEGORY c ON b.CATEGORYNUM  = c.CATEGORYNUM 
+		and sc.id=#{id}
+	</select>
+	
+	<!--  총합-->
+	<select id="priceselect" resultType="String">
+		SELECT (b.PRICE*sc.BOOKCNT) price
+		FROM
+		BOOK b JOIN SHOPPING_CART sc ON b.BOOKNUM =sc.BOOKNUM
+	</select>
+	
+	
+	<!-- 출고예정-->
+	<select id="releaseBook" resultType="String">
+	 SELECT TO_CHAR(regdate_cart +2,'RRRR-MM-DD') FROM SHOPPING_CART
+	 </select> 
+		
+		
+		
+	<!-- 주문 수량 -->
+	<select id="Carttotalcnt" resultType="int">
+		SELECT count(*) FROM SHOPPING_CART
+	</select>
+		
+	<!-- 체크박스있는거 삭제-->	
+	<delete id="checkdel" parameterType="int">
+		DELETE FROM SHOPPING_CART WHERE shopnum =#{idx}  
+	</delete>
+	
+	<!-- 삭제-->	
+	<delete id="delOne" parameterType="int">
+		DELETE FROM SHOPPING_CART WHERE shopNum =#{shopNum}  
+	</delete>
+	
+	<!-- 수량변경 -->
+	<update id="updateCnt" parameterType="vo.OrderVO">
+			UPDATE SHOPPING_CART  SET bookCnt= #{bookCnt} WHERE shopnum= #{shopnum}	
+	</update>
+	
+	<!-- 주문하기 -->
+	<insert id="payone" parameterType="vo.OrderVO">
+		INSERT INTO BOOK_PURCHASE(PURCHASENUM,ID,REGDATE,SHOPNUM,BOOKCNT,BOOKNUM,price) values(purchase_seq.nextVal,#{id},sysdate,#{shopnum},#{bookCnt},#{bookNum},#{price})  
+	</insert>
+	
+	
+	<!-- booktable-->
+	<select id="findbook" resultType="vo.OrderVO" parameterType="int">
+		SELECT * FROM book where  BOOKNUM = #{bookNum}
+	</select>
+	
+
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	
+	<typeAliases>
+		<!-- <typeAlias type="vo.BoardVo" alias="board"/> -->
+		<typeAlias type="vo.ReviewVO" alias="review"/>
+		 <typeAlias type="vo.BookVO" alias="book"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="config/mybatis/mapper/JungoMapper.xml" />
+		 <mapper resource="config/mybatis/mapper/userMapper.xml" />
+		 <mapper resource="config/mybatis/mapper/listMapper.xml" />	
+		 <mapper resource="config/mybatis/mapper/JungoReplyMapper.xml" />
+		 <mapper resource="config/mybatis/mapper/review.xml" />
+		 <mapper resource="config/mybatis/mapper/book.xml" />
+		 <mapper resource="config/mybatis/mapper/purchase.xml" />
+		<mapper resource="config/mybatis/mapper/shoppingCart.xml" /> 	
+	</mappers>
+</configuration>

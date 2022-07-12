@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+<!--  	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+ -->	 
+	<!-- <context:component-scan base-package="com.spring.controller" /> -->
+	<context:annotation-config/>
+	
+	
+		<!-- 업로드 패스 설정 --> 
+<beans:bean class="java.lang.String" id="uploadPath">
+ <beans:constructor-arg value="C:\Users\teasd\OneDrive\바탕 화면\웹3 프젝\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\bookkk\resources" />
+</beans:bean>
+
+<!-- 일반 파일 업로드 경로 -->
+<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+
+<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+ <beans:property name="maxUploadSize" value="10485760"/>
+</beans:bean>
+	
+	
+	<beans:bean id="JungoInterceptor" class="interceptor.JungoInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<mapping path="/bookListJungo"/>
+			<mapping path="/jungomodify"/>
+			<mapping path="/jungoregister"/>
+			<mapping path="/jungoSearch"/>
+			<mapping path="/jungosearchmodify"/>
+			<mapping path="/jungosearchview"/>
+			<mapping path="/jungoview"/>
+			<mapping path="/sellerPage"/>
+			
+			
+			<beans:ref bean="JungoInterceptor" />
+		</interceptor>
+		
+		
+	</interceptors>
+	
+	<beans:bean class="com.spring.controller.DetailController"> 
+		<beans:property name="review_dao" ref="review_dao"/>
+		<beans:property name="book_dao" ref="book_dao"/>
+		<beans:property name="review_vo" ref="review_vo"/>
+	</beans:bean>	
+	
+	 <beans:bean class="com.spring.controller.UserController"> 
+		<beans:property name="user_dao" ref="user_dao"/>
+	</beans:bean> 	
+	
+	
+	<beans:bean class="com.spring.controller.ListController"> 
+		<beans:property name="service" ref="book_serviceBean"/>
+		<beans:property name="review_dao" ref="review_dao"/>		
+	</beans:bean>
+	
+	
+		<beans:bean class="com.spring.controller.JungoController"> 
+		<beans:property name="service" ref="jungobook_serviceBean"/>
+		<beans:property name="replyservice" ref="jungoreply_serviceBean"/>
+	</beans:bean>
+	
+		<beans:bean class="com.spring.controller.OrderController">
+		<beans:property name="user_dao" ref="user_dao"/>
+		<beans:property name="book_dao" ref="book_dao"/>
+		<beans:property name="order_dao" ref="order_dao"/>
+		<beans:property name="delivert_vo" ref="DeliveryVO"/>
+	</beans:bean>
+	
+	
+	<beans:bean class="com.spring.controller.ShoppingCartController">
+		<beans:property name="user_dao" ref="user_dao"/>
+		<beans:property name="book_dao" ref="book_dao"/>
+		<beans:property name="shopping_dao" ref="shoppingCart_dao"/>
+		<beans:property name="shoppingCart_vo" ref="shoppingCart_vo"/>
+	</beans:bean>
+	
+	
+</beans:beans>

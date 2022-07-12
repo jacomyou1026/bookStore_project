@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="listMapper">
+   
+
+ 
+ 
+ 
+ 		<!--  검색 동적 sql -->
+	  	<sql id="search">
+			<if test="condition == 'subject'.toString()">AND subject LIKE '%' || #{keyword} || '%'</if>
+			<if test="condition == 'publisher'.toString()">AND publisher LIKE '%' || #{keyword} || '%'</if>
+			<if test="condition == 'author'.toString()">AND author LIKE '%' || #{keyword} || '%'</if>
+		</sql>
+	  
+	  
+	  
+	  
+	  <!-- 1차 분류 리스트 -->
+                  <select id="list_1"  resultType="vo.BookVO" >
+       
+  	   select*from(select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent})	
+                    		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY bookNum DESC       
+                 
+    </select> 
+        
+        <!-- 2차분류 리스트 -->
+            <select id="list_2"  resultType="vo.BookVO" >
+     select * from (select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM,b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum})	
+        		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY bookNum DESC
+		
+    </select>  
+    
+    <!-- 국내도서리스트 -->
+	<select id ="listIncountry"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 100000 and categoryNum < 200000 )	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC
+		]]>
+            
+	</select>
+	<!-- 외국도서 리스트 -->
+	<select id ="listOutcountry"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 200000 and categoryNum < 300000 )	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC
+		]]>
+            
+	</select>	
+	
+	
+	
+	
+	
+	
+   
+   
+   	<!--  국내도서 개수 -->
+   	<select id="IncountryCount" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 100000 and categoryNum < 200000  ]]> 
+	</select>
+	<!--  외국도서 개수 -->
+   	<select id="OutcountryCount" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 200000 and categoryNum < 300000  ]]> 
+	</select>
+
+
+
+ 	<!--  1차분류 개수 -->
+   	<select id="primaryClassification" resultType="int">
+            	   select COUNT (bookNum) from(select b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent} )	
+  
+	</select>
+	 <!--  2차분류 개수 -->
+	   	<select id="secondaryClassification" resultType="int" >
+          	   select COUNT (bookNum) from(select b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum} )
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!--  전체 책개수  검색용-->
+	
+	   	<select id="CountAll" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 100000 and categoryNum < 300000  ]]> <include refid="search"></include> 	
+	</select>
+	
+	<!--  전체 책 리스트 검색용-->
+	   <select id="ListAll"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 100000 and categoryNum < 300000 ]]><include refid="search"></include> )	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC     
+                 
+    </select> 
+    
+    
+
+
+	
+	
+	   	<select id="CountNew" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 100000 and categoryNum < 300000  ]]> 	
+	</select>
+	
+	   <select id="ListNew"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 100000 and categoryNum < 300000 ]]>)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC     
+                 
+    </select>  
+	
+ 
+	
+	
+	
+	
+
+
+
+
+
+
+
+	<!--  베스트셀러 라인-->
+
+	  <!-- 베스트 셀러 1차 분류 리스트 -->
+                  <select id="list_1_best"  resultType="vo.BookVO" >
+       
+  	   select*from(select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent} and bestCk = 1 )	
+                    		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY bookNum DESC       
+                 
+    </select> 
+        
+        <!-- 베스트 셀러 2차분류 리스트 -->
+            <select id="list_2_best"  resultType="vo.BookVO" >
+     select * from (select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM,b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum} and bestCk = 1)	
+        		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY bookNum DESC
+		
+    </select>  
+    
+    <!-- 베스트 셀러 국내도서리스트 -->
+	<select id ="listIncountry_best"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 100000 and categoryNum < 200000 and bestCk = 1)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC
+		]]>
+            
+	</select>
+	<!-- 베스트 셀러 외국도서 리스트 -->
+	<select id ="listOutcountry_best"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 200000 and categoryNum < 300000 and bestCk = 1)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC
+		]]>
+            
+	</select>	
+	
+	
+	
+	
+	
+	
+   
+   
+   	<!--  베스트 셀러 국내도서 개수 -->
+   	<select id="IncountryCount_best" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 100000 and categoryNum < 200000  and bestCk = 1 ]]> 
+	</select>
+	<!--  베스트 셀러 외국도서 개수 -->
+   	<select id="OutcountryCount_best" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 200000 and categoryNum < 300000  and bestCk = 1 ]]> 
+	</select>
+
+
+
+ 	<!--   베스트 셀러 1차분류 개수 -->
+   	<select id="primaryClassification_best" resultType="int">
+            	   select COUNT (bookNum) from(select b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent} and bestCk = 1 )	
+  
+	</select>
+	 <!--  베스트 셀러 2차분류 개수 -->
+	   	<select id="secondaryClassification_best" resultType="int" >
+          	   select COUNT (bookNum) from(select b.bookNum, b.subject, b.author,b.img,b.publishDate,b.publisher,b.intro,b.stock,b.price,c.categoryNum,c.cateName,c.cateParent
+    from book b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum}  and bestCk = 1)
+	</select>
+	
+	 	
+	<!--  베스트셀러  전체 책개수 -->
+	
+	   	<select id="CountBestbook" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (bookNum) FROM book where categoryNum >= 100000 and categoryNum < 300000 and bestCk = 1 ]]>
+	</select>
+	
+	<!--  베스트셀러  전체 책 리스트 -->
+	   <select id="ListBestbook"  resultType="vo.BookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY bookNum DESC) AS RNUM, bookNum,subject,author,publishDate,publisher,price,intro,stock,img,categoryNum,
+            (select cateName from category where book.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
+            from book where categoryNum >= 100000 and categoryNum < 300000 and bestCk = 1]]>)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY bookNum DESC     
+                 
+    </select>    
+  
+
+<!-- api 삽입 -->
+
+   <insert id="insert_api">
+	   insert into book (bookNum, subject, author, publishDate, publisher, price, intro, stock,img,categoryNum)
+	   			values(book_seq.NEXTVAL, #{subject}, #{author}, #{publishDate}, #{publisher}, #{price}, #{intro}, #{stock},#{img}, #{categoryNum})
+   </insert>	
+
+   
+</mapper>

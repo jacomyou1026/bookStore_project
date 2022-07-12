@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JungoMapper">
+
+
+ 
+ 		<!--  검색 동적 sql -->
+	  	<sql id="search">
+			<if test="condition == 'Jsubject'.toString()">AND Jsubject LIKE '%' || #{keyword} || '%'</if>
+			<if test="condition == 'Jpublisher'.toString()">AND Jpublisher LIKE '%' || #{keyword} || '%'</if>
+			<if test="condition == 'Jauthor'.toString()">AND Jauthor LIKE '%' || #{keyword} || '%'</if>
+		</sql>
+   
+	   	<!-- 중고 카테고리 리스트 -->
+  	<select id="cateList" resultType="vo.CategoryVO">
+  	
+  		select * from category order by categoryNum
+  	
+  	</select>
+ 
+   	 <!-- 중고 책 등록   -->
+  	<insert id="JungoBookEnroll">
+  	
+  		insert into jungobook(JbookNum, Jsubject, Jauthor, JpublishDate, Jpublisher, Jprice, Jintro, Jstock, Jimg, categoryNum,id)
+		values(jungobook_seq.NEXTVAL,#{Jsubject}, #{Jauthor},#{JpublishDate},#{Jpublisher},#{Jprice},#{Jintro},#{Jstock},#{Jimg},#{categoryNum},#{id})
+
+  	</insert>
+	
+<!-- 중고책 조회 -->
+<select id="jungoview" resultType="vo.JungoBookVO">
+ select JbookNum, Jsubject, Jauthor, JpublishDate, Jprice, Jpublisher, Jintro, Jstock,Jimg,categoryNum,id
+     from jungobook
+         where JbookNum = #{JbookNum}
+</select>
+
+	
+	<!-- 중고책 수정 -->
+	
+	<update id="jungoModify">
+		
+		update jungobook set Jsubject = #{Jsubject}, Jauthor = #{Jauthor}, JpublishDate = #{JpublishDate}, Jpublisher = #{Jpublisher}, 
+		Jimg = #{Jimg}, categoryNum = #{categoryNum}, Jprice = #{Jprice}, Jstock = #{Jstock}, Jintro = #{Jintro}
+		where JbookNum = #{JbookNum} and id = #{id}
+		
+	</update>
+
+	  <!-- 아이디 체크 -->
+	<select id="JungoIdCk" resultType="String">
+	 select id from jungobook where JbookNum = #{JbookNum}
+	</select>
+	  
+	  	<!-- 중고책 삭제 -->
+	<delete id="jungoDelete">
+	 delete jungobook where JbookNum = #{JbookNum} and id = #{id}
+	</delete>
+	  <!-- 1차 분류 리스트 -->
+                  <select id="list_1"  resultType="vo.JungoBookVO" >
+       
+  	   select*from(select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM, b.JbookNum, b.Jsubject, b.Jauthor,b.Jimg,b.JpublishDate,b.Jpublisher,b.Jintro,b.Jstock,b.Jprice,b.id,c.categoryNum,c.cateName,c.cateParent
+    from jungobook b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent})	
+                    		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY JbookNum DESC       
+                 
+    </select> 
+        
+        <!-- 2차분류 리스트 -->
+            <select id="list_2"  resultType="vo.JungoBookVO" >
+     select * from (select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM,b.JbookNum, b.Jsubject, b.id,b.Jauthor,b.Jimg,b.JpublishDate,b.Jpublisher,b.Jintro,b.Jstock,b.Jprice,c.categoryNum,c.cateName,c.cateParent
+    from jungobook b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum})	
+        		WHERE RNUM BETWEEN #{search.rowStart} AND #{search.rowEnd}
+		ORDER BY JbookNum DESC
+		
+    </select>  
+    
+    <!-- 국내도서리스트 -->
+	<select id ="listIncountry"  resultType="vo.JungoBookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM, JbookNum,Jsubject,Jauthor,JpublishDate,Jpublisher,Jprice,Jintro,Jstock,Jimg,categoryNum,id,
+            (select cateName from category where jungobook.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where jungobook.categoryNum = category.categoryNum) cateParent
+            from jungobook where categoryNum >= 100000 and categoryNum < 200000 )	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY JbookNum DESC
+		]]>
+            
+	</select>
+	<!-- 외국도서 리스트 -->
+	<select id ="listOutcountry"  resultType="vo.JungoBookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM, JbookNum,Jsubject,Jauthor,JpublishDate,Jpublisher,Jprice,Jintro,Jstock,Jimg,categoryNum,id,
+            (select cateName from category where jungobook.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where jungobook.categoryNum = category.categoryNum) cateParent
+            from jungobook where categoryNum >= 200000 and categoryNum < 300000 )	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY JbookNum DESC
+		]]>
+            
+	</select>	
+	
+	
+	
+	
+	
+	
+   
+   
+   	<!--  국내도서 개수 -->
+   	<select id="IncountryCount" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (JbookNum) FROM jungobook where categoryNum >= 100000 and categoryNum < 200000  ]]> 
+	</select>
+	<!--  외국도서 개수 -->
+   	<select id="OutcountryCount" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (JbookNum) FROM jungobook where categoryNum >= 200000 and categoryNum < 300000  ]]> 
+	</select>
+
+
+
+ 	<!--  1차분류 개수 -->
+   	<select id="primaryClassification" resultType="int">
+            	   select COUNT (JbookNum) from(select b.JbookNum, b.id,b.Jsubject, b.Jauthor,b.Jimg,b.JpublishDate,b.Jpublisher,b.Jintro,b.Jstock,b.Jprice,c.categoryNum,c.cateName,c.cateParent
+    from jungobook b inner join category c
+        on  b.categoryNum = c.categoryNum
+          	where  c.cateParent = #{cateParent} )	
+  
+	</select>
+	 <!--  2차분류 개수 -->
+	   	<select id="secondaryClassification" resultType="int" >
+          	   select COUNT (JbookNum) from(select b.JbookNum,b.id, b.Jsubject, b.Jauthor,b.Jimg,b.JpublishDate,b.Jpublisher,b.Jintro,b.Jstock,b.Jprice,c.categoryNum,c.cateName,c.cateParent
+    from jungobook b inner join category c
+        on  b.categoryNum = c.categoryNum
+        where b.categoryNum = #{categoryNum} )
+	</select>
+	
+	
+	<!--  중고 책개수 -->
+	
+	   	<select id="CountJungo" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (JbookNum) FROM jungobook where categoryNum >= 100000 and categoryNum < 300000  ]]> 	
+	</select>
+	
+	<!--  중고 전체 책 리스트 -->
+	   <select id="ListJungo"  resultType="vo.JungoBookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM, JbookNum,id,Jsubject,Jauthor,JpublishDate,Jpublisher,Jprice,Jintro,Jstock,Jimg,categoryNum,
+            (select cateName from category where jungobook.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where jungobook.categoryNum = category.categoryNum) cateParent
+            from jungobook where categoryNum >= 100000 and categoryNum < 300000 ]]>)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY JbookNum DESC 
+		</select>
+		
+			<!--  중고검색 책개수  -->
+	
+	   	<select id="CountJungoSearch" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (JbookNum) FROM jungobook where categoryNum >= 100000 and categoryNum < 300000  ]]><include refid="search"></include> 	
+	</select>
+	
+	<!--  중고검색 책 리스트 -->
+	   <select id="ListJungoSearch"  resultType="vo.JungoBookVO" >
+			<![CDATA[
+			select * from ( select ROW_NUMBER() OVER(ORDER BY JbookNum DESC) AS RNUM, JbookNum,id,Jsubject,Jauthor,JpublishDate,Jpublisher,Jprice,Jintro,Jstock,Jimg,categoryNum,
+            (select cateName from category where jungobook.categoryNum = category.categoryNum) cateName,
+            (select cateParent from category where jungobook.categoryNum = category.categoryNum) cateParent
+            from jungobook where categoryNum >= 100000 and categoryNum < 300000 ]]><include refid="search"></include>)	
+            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY JbookNum DESC       
+                 
+    </select>  
+	
+	
+		<!--  중고 사용자 책개수 -->
+	
+	<select id="CountUserJungo" resultType="int" >
+   				<![CDATA[
+        		SELECT COUNT (JbookNum) FROM jungobook where categoryNum >= 100000 and categoryNum < 300000 and id = #{id} ]]> 	
+	</select>
+ 
+
+   
+</mapper>

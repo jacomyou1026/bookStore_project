@@ -48,7 +48,8 @@ CREATE TABLE  "BOOK_PURCHASE"
    "PRICE" NUMBER, 
    "DELIVERYSEP" NUMBER DEFAULT 0, 
     PRIMARY KEY ("PURCHASENUM") ENABLE
-   ) ;ALTER TABLE  "BOOK_PURCHASE" ADD FOREIGN KEY ("ID")
+   ) ;
+ALTER TABLE  "BOOK_PURCHASE" ADD FOREIGN KEY ("ID")
      REFERENCES  "BOOK_USER" ("ID") ENABLE;
 
 --category
@@ -77,8 +78,10 @@ CREATE TABLE  "DELIVERY"
    "DELREGDATE" DATE DEFAULT sysdate, 
    "DELIVERYNAME" VARCHAR2(30), 
     PRIMARY KEY ("DELIVERYNUM") ENABLE
-   ) ;ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("ID")
-     REFERENCES  "BOOK_USER" ("ID") ENABLE;ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("BOOKNUM")
+   ) ;
+ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("ID")
+     REFERENCES  "BOOK_USER" ("ID") ENABLE;
+ALTER TABLE  "DELIVERY" ADD FOREIGN KEY ("BOOKNUM")
      REFERENCES  "BOOK" ("BOOKNUM") ENABLE;
 
 --shopping cart
@@ -89,8 +92,14 @@ CREATE TABLE  "SHOPPING_CART"
    "REGDATE_CART" DATE, 
    "BOOKCNT" NUMBER DEFAULT 1, 
     PRIMARY KEY ("SHOPNUM") ENABLE
-   ) ;ALTER TABLE  "SHOPPING_CART" ADD FOREIGN KEY ("BOOKNUM")
+   ) ;
+
+ALTER TABLE  "SHOPPING_CART" ADD FOREIGN KEY ("BOOKNUM")
      REFERENCES  "BOOK" ("BOOKNUM") ENABLE;
+
+
+ALTER TABLE BOOK_USER MODIFY(ADDRESS1 VARCHAR2(4000));
+ALTER TABLE BOOK_USER RENAME COLUMN shop_point TO shoppoint;
 
 --jungotable
 CREATE TABLE Jungobook (
@@ -122,7 +131,6 @@ constraint rs foreign key (Id)
    references BOOK_USER(Id) on delete cascade,
 constraint ra foreign key(JbookNum)
    references jungobook(JbookNum) on delete cascade
-
 );
 
 --review
@@ -143,6 +151,8 @@ CREATE TABLE review (
 );
 
 create sequence jungoreply_seq;
-create sequence jungobook_seq
+create sequence jungobook_seq;
 create sequence bookseq;
 create sequence seq_review_idx;
+create sequence purchase_seq;
+

@@ -1,0 +1,439 @@
+@charset "UTF-8";
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	
+}
+li{
+	font-size: 11px;
+}
+.mainbox span{
+	font-size: 11px;
+}
+
+table{
+	border-collapse: none;
+}
+
+:root {
+	/* color  */ 
+	-border: #DDDDDD;
+	/* font size  */ 
+	
+	-size: 12px; 
+	-big-size: 24px;
+	/* background */ 
+	-background-color: #DDE5FF;
+}
+
+h2 {
+	font-size: 21px;
+}
+
+.mainbox {
+	width: 80%;
+	margin: auto;
+	/* border: 1px solid blue; */
+	/* background-color:#969696; */
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+}
+
+header>img {
+	width: 100%;
+}
+
+header> .head {
+	background-color: #DDE5FF;
+}
+
+header> .head>ul {
+	display: flex;
+	padding: 6px;
+	justify-content: space-evenly;
+}
+
+.order_info {
+	margin: 30px auto;
+	
+}
+
+.order_info>ul  {
+	display: flex;
+	align-items: center;
+}
+
+.order_info>ul>li:nth-child(1) {
+    background: #DDE5FF;
+    text-align: center;
+    padding: 10px 34px;
+    margin-left: 50px;
+    font-size: 11px;
+}
+.heand_ul{
+	font-size: 11px;
+	
+}
+.order_info>ul>li:nth-child(2) {
+    border-right: 1px solid #DDDDDD;
+    font-size: 11px;
+    padding-left: 28px;
+    padding: 10px 40px;
+}
+
+
+.order_info>ul>li:nth-child(3) {
+  padding-left: 10px;
+    /* padding-right: 14px; */
+    border-right: 1px solid #DDDDDD;
+    font-size: 11px;
+    padding: 10px 27px;
+}
+
+.order_info>ul>li:nth-child(4) {
+    /* padding-left: 10px; */
+    font-size: 11px;
+    padding: 10px 37px;
+}
+
+
+main {
+	width: 50%;
+}
+
+main .info {
+	margin: 10px auto;
+	margin-bottom: 36px;
+	margin-top: 46px;
+	margin-left: 50px
+}
+
+
+main .info h2 {
+	margin-bottom: 8px;
+}
+
+.de_info {
+	border-top: 1px solid #DDDDDD;
+	padding: 21px 0;
+	border-bottom: 1px solid #DDDDDD;
+	width: 69%;
+}
+
+.blue {
+	color: #365FE4;
+	margin-right: 7px;
+}
+
+.update {
+	background: aliceblue;
+	padding: 8px;
+	font-size: 5px;
+	outline: 0;
+	border: 1px;
+	border-color: #DDDDDD;
+	box-shadow: none;
+}
+
+.table_head >td{
+	    padding: 3px 38px;
+    
+	
+}
+.order_item{
+	    
+    margin-top: 25px;
+	    
+    margin-left: 50px;
+}
+
+.order_item>h2 {
+	margin-bottom: 10px;
+
+	/* border-bottom: 1px solid #DDDDDD; */
+}
+
+.table_head {
+	background: #DDE5FF;
+}
+
+.table_border {
+	border-right: 1px solid #DDDDDD;
+}
+
+td {
+	
+     text-align: center;
+    font-size: 4px;
+	
+}
+
+.discount {
+	margin: 10px 0;
+	margin-top: 36px;
+}
+
+.discount h2 {
+	margin-bottom: 12px;
+}
+.td_one{
+	
+    padding: 27px;
+}
+aside {
+	width: 40%;
+}
+
+.flex {
+	display: flex;
+}
+
+.d {
+	position: sticky;
+	top: 20px;
+	border: 2px solid;
+	margin-top: 36px;
+}
+
+.date {
+	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.d_blue {
+	padding: 20px 10px;
+	background-color: var(- -background-color);
+	padding-bottom: 0;
+}
+
+.price_tag {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 21px;
+	padding-bottom: 16px;
+	/* border: 1px solid; */
+	border-bottom: 1px solid;
+}
+
+.one {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.two {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.final_pr {
+    /* text-align: center; */
+    margin-top: 13px;
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.total_point {
+	font-size: 13px;
+}
+
+.totals {
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.agree {
+	display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.btn {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.contents {
+	font-size: 10px;
+	line-height: 1.6;
+	margin: 10px 10px;
+	margin-bottom: 10px;
+}
+
+.totals_points {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	padding: 10px;
+}
+.total_point_{
+	    background-color: #DDE5FF;
+	    
+    border-top: 1px solid;
+}
+.save_money{
+    background-color: #DDE5FF;
+    /* padding: 10px 13px; */
+    border-bottom: 1px solid;
+    padding: 23px;
+}
+.pay{
+	
+    padding: 10px;
+    margin-bottom: 1px;
+    background-color: aliceblue;
+        border: none;
+    border-radius: 9px;
+	
+}
+
+.shopping{
+	    padding: 10px;
+    background-color: aliceblue;
+        border: none;
+    border-radius: 9px;
+	
+}
+.owner >li{
+	   border-top: 1px solid;
+    border-bottom: 1px solid;
+    
+}
+
+.relaese{
+	font-size: 17px;
+    /* padding: 1px; */
+    padding: 8px;
+    font-weight: 600;
+
+}
+.d_location{
+	display: block;
+    margin-bottom: 13px;
+    margin-left: 9px;
+}
+
+button{
+	background-color: aliceblue;
+    border: none;
+}
+.all_use{
+	    width: 24%;
+    font-size: 11px;
+    background-color: aliceblue;
+    border: none;
+    padding: 7px;
+    border-radius: 7px;
+}
+.relaese_date{
+	
+    margin-left: 16px;
+    color: #FF0000;
+    font-weight: 600;
+	font-size: 27px;
+	
+}
+.relaese_frame{
+	border: 1px solid;
+    padding: 23px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.add_input_2{
+    font-size: 14px;
+    width: 85%;
+    padding: 5px;
+}
+.add_input_3{
+	font-size: 14px;
+    width: 85%;
+    padding: 5px;
+}
+.find_add{
+	font-size: 11px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+	background: #DDE5FF;
+}
+.address_input_1_boxs{
+	display: flex;
+    align-content: center;
+    margin-bottom: 3px;
+}
+.address_input_1_box{
+	display: inline-block;
+    margin-right: 7px;
+}
+.new_name ,  .num1, .num2, .num3, .add_input_1, .add_input_2 , .add_input_3{
+	font-size: 13px;
+	padding: 3px;
+}
+.box-radio-input{
+	padding: 10px;
+    border: 3px dashed;
+}
+
+#charge_kakao{
+	padding: 23px;
+    border-radius: 29px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    left: 33%;
+    bottom: 10%;
+    margin-top: 19px;
+}
+.card-body bg-white mt-0 shadow{
+	margin-bottom: 65px;
+    border: 1px solid;
+    border-radius: 21px;
+    padding: 11px;
+    text-align: center;
+}
+
+
+#card_body{
+	border-top: 1px solid  #DDDDDD;
+		border-bottom: 1px  #DDDDDD;
+		margin-bottom: 78px;
+}
+.box_radio_frame{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px 100px;
+    gap: 5px;
+	margin: 6px;
+}
+/* input[name="cp_item"]{
+	opacity: 0;
+} */
+label>span{
+	display: flex;
+    justify-content: center;
+}
+.box-radio-input:hover{
+	background-color: #F0F8FF;
+}
+
+.box-radio-input:active{
+	background-color: #F0F8FF;
+}

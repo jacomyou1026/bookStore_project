@@ -1,0 +1,180 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    
+}
+
+.mainbox {
+	width: 80%;
+	/* height: 1000px; */
+	margin: auto;
+	border: 1px solid blue;
+	/* background-color:#969696; */
+	padding :0px 0px 20px 0px;
+}
+
+
+header>img {
+	width: 100%;
+}
+
+header> .head {
+	background-color: #DDE5FF;
+}
+
+header> .head>ul {
+	display: flex;
+	padding: 6px;
+	justify-content: space-evenly;
+}
+header {
+    display: flex;
+    flex-direction: column;
+}
+.normalpayfrmae{
+	margin-top: 24px;
+    border-bottom: 1px solid;
+}
+
+.normalpay{
+	padding: 10px;
+    border-left: 1px solid;
+    border-top: 1px solid;
+    display: inline-block;
+    border-right: 1px solid;
+	padding: 21px;
+    background-color: #ffff;
+    font-size: 20px;
+}
+
+.table_head{
+    background: aliceblue;
+    padding: 19px;
+    border-top: 1px solid;
+    margin-top: 11px;
+}
+
+.table_header_td{
+    padding: 9px;
+    text-align: center;
+}
+.div_flex{
+    display: flex;
+    margin: 12px;
+}
+
+.Income{
+    background-color: aliceblue;
+    padding: 5px;
+    font-size: 3px;
+}
+
+.free{
+    padding: 5px;
+    font-size: 3px;
+    border: 1px solid grey;
+}
+
+.table_felx1{
+    display: flex;
+
+}
+
+.book_name:hover{
+    border-bottom:1px solid ;
+}
+.table_price{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+}
+.table_cnt{
+    width: 40px;
+    height: 22px;
+}
+.btn_two{
+    margin-top: 10px;
+}
+.two_btn{
+    background-color: aliceblue;
+    border: 1px solid grey;
+    padding: 6px;
+    font-size: 15px;
+}
+.table_body > td{
+    border-bottom: 1px solid grey;
+}
+.delbtn{
+    background-color: aliceblue;
+    padding: 6px;
+    border-radius: 7px;
+    border: 1px solid grey;
+    margin-left: 7px;
+}
+.checkbtn{
+    width: 24px;
+    height: 18px;
+    align-items: center;
+    margin-top: 7px;
+}
+.frame_del_check{
+    margin: 11px;
+    margin-top: 24px;
+    display: flex;
+}
+
+.img_down{
+    padding: 43px 8px;
+    background-color: #DDE5FF;
+    display: inline-block;
+    margin-left: 14px;
+}
+.productprice{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-content: center;
+    justify-content: space-around;
+}
+.productprice_name1{
+    padding: 10px;
+    background-color: aliceblue;
+    padding-left: 17px;
+    padding-right: 31px;
+}
+.down_flex{
+    display: flex;
+
+}
+.finalprice >th{
+    background-color: #DDE5FF;
+    padding: 13px;
+}
+.finalprice2 > td{
+    border-bottom: 1px solid #DDE5FF;
+}
+.addsave{
+    margin: 10px;
+    margin-top: 26px;
+    margin-left: 51px;
+}
+.orderbtn{
+    padding: 20px 100px;
+    margin-top: 17px;
+    background-color: aliceblue;
+    border: none;
+    font-weight: 800;
+    font-size: larger;
+}
+
+.notbook{
+	    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    margin-top: 31px;
+}
+}

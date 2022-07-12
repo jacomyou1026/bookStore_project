@@ -1,0 +1,552 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+/* 화면 전체 렙 */
+.wrapper{
+	width: 100%;
+}
+/* content 랩 */
+.wrap{
+	width : 100%;
+	margin: auto;
+}
+
+
+/* 로고, 검색, 로그인 */
+.top_area{
+	width: 100%;
+    height: 150px;
+    /* background-color: #f7f0b9; */
+}
+
+/* 홈페이지 기능 네비 */ 
+.nav{
+	width: 100%;
+    height: 50px;
+    position:relative;    
+}
+.nav .list{
+	position: absolute;
+    top: 0px;
+    right: 0;
+    
+}
+.nav .list li{
+	list-style: none;	
+    float : left;
+    padding: 13px 15px 0 10px;
+    font-weight: 900;
+    cursor: pointer;
+
+}
+.nav .list li a{
+	color:#A0A0FF;
+	text-decoration:none;
+}
+
+
+/* 로고 영역 */
+.logo_area{
+	width: 25%;
+	height: 100%;
+	float:left;
+	text-align: right;
+
+}
+.logo_area img{
+	height: 150px
+}
+
+
+/* 검색 박스 영역 */
+.search_area{
+	width: 50%;
+	height: 100%;
+	float:left;	
+}
+
+
+.search_select{
+	float: left;
+
+	width: 20%;
+	height: 100%;
+
+}
+#condition{
+	display: block;
+	width: 70px;
+	height: 45px;
+	margin-top: 50px;
+	margin-left:70px;
+	border: 1px solid green;
+}
+.search_content{
+	float: left;
+	width: 80%;
+	height: 100%;
+
+}
+.search_box{
+	margin-top: 50px;
+	width: 378px;
+	height: 45px;
+border: 1px solid green;
+
+}
+
+
+
+#keywordInput{
+	font-size: 16px;
+	width: 320px;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+	height : 43px;
+}
+
+#searchBtn{
+	width: 50px;
+	height: 43px;
+	border: 0px;
+	background :green;
+	outline: none;
+	float: right;
+	color: #ffffff;
+
+}
+/* 로그인 버튼 영역 */
+.login_area{
+	width: 25%;
+	height: 100%;
+	float:left;	
+}
+
+
+/* 책 카테고리 */
+.jungo_category_nav{
+	width: 100%;
+    height: 70px;
+    	background-color: #54BD54;
+}
+.jungo_category_nav .list{
+	float: right;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.jungo_category_nav li{
+	float: left;
+	margin-left: 50px;
+	line-height: 70px;
+
+}
+
+.jungo_category_nav li a{
+	color:#545454;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: bold;
+	color:white;
+	margin-left: 10px;
+
+}
+.jungo_category_nav li:last-child{
+	margin-right: 500px;
+}
+
+
+
+/* 홈페이지 메인 제품 목록  */
+.content_area{
+	width: 100%;
+    height: 3000px;
+
+}
+
+ #aside h3 { font-size:22px; margin-bottom:20px; text-align:center; }
+ #aside li { font-size:16px; text-align:center; }
+ #aside li a { color:#000; display:block; padding:10px 0; text-decoration:none}
+ #aside li a:hover { text-decoration:none; background:#eee; }
+ 
+ #aside li { position:relative; }
+#aside li:hover { background:#eee; }   
+#aside li > ul.low { display:none; position:absolute; top:0; left:180px;     list-style: none; }
+#aside li:hover > ul.low { display:block; }
+#aside li:hover > ul.low li a { background:#eee; border:1px solid #eee; text-decoration:none}
+#aside li:hover > ul.low li a:hover { background:#fff;}
+#aside li > ul.low li { width:180px; }
+#aside { float:left; width:14%; height: 100%; margin-top:20px;}
+.hi{
+	
+}
+
+#tier1{
+	display: block;
+	background-color: #147814;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	line-height: 55px;
+	margin-bottom: 20px;
+
+}
+#tier2{
+	display: block;
+	background-color: #50C785;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	line-height: 55px;
+	margin-bottom: 20px;
+	text-decoration: none;
+}
+/* 메인 박스 사이즈 */
+#main_box{
+   width: 80%;
+    height: 100%;
+    margin: auto;
+
+}
+
+.content{
+	float :left;
+	height: 2930px;
+	width: 86%;
+	}
+
+.booklist_nav{
+	width: 100%;
+	height: 70px;
+        border-bottom-style: solid ;
+        border-color: #8C8CFF;
+        	margin-top: 10px;
+	margin-left: 10px;
+
+}
+.booklist_ul{
+	width: 100%;
+	height: 30px;
+}
+.booklist_ul span{
+ color:black;
+ font-weight: 600;
+
+ font-size: 15px;
+}
+
+.booklist_sub{
+	width: 100%;
+	height: 40px;
+	text-align: center;
+	background-color: #6482FF;
+}
+.booklist_sub span{
+	color: white;
+	font-size: 20px;
+}
+/* footer navai 영역 */
+.footer_nav{
+	width:100%;
+	height:50px;
+
+}
+.footer_nav_container{
+	width: 100%;
+	height: 100%;
+	background-color:#969696;
+
+
+}
+.footer_nav_container>ul{
+	font-size: 12px;
+	float:left;
+	list-style:none;
+	position:relative;
+	line-height: 47px;
+	font-family: dotum;
+	margin-left: 10px;
+	color:white;
+	padding:0;
+	margin-top: 0;
+}
+.footer_nav_container>ul>li:first-child{
+	margin-left: 350px;
+	}
+
+.footer_nav_container>ul>li{
+	display:inline;
+	width: 45px;
+	height: 19px;
+	padding: 10px 9px 0 10px;
+}
+.footer_nav_container>ul>span{
+	margin: 0 4px;
+}
+/* footer 영역 */
+.footer{
+	width:100%;
+	height:100%;
+	background-color:#dcdcdc;
+	padding-bottom : 50px;
+	margin:0;
+	text-align: center;
+}
+.footer_container{
+	width: 100%;
+
+}
+
+.footer_left>img {
+	width: 200px;
+    height: 100px;
+}
+.footer_left{
+margin:0 auto; 
+	width: 200px;
+
+	
+}
+.footer_right{
+margin:0 auto; 
+	width: 680px;
+
+}
+
+
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+
+
+
+.booklist{
+	margin-top: 20px;
+	width: 100%;
+	height: 250px;
+	border-bottom: solid 1px black;
+}
+
+.list_image{
+
+	height: 80%;
+	width: 20%;
+	float: left;
+}
+
+.list_detail{
+
+	height: 80%;
+	width: 60%;
+	float: left;
+
+}
+
+
+
+#list_image{
+	display: block;
+	height: 100%;
+	width: 90%;
+	margin-left: 10px;
+}
+.list_detail a{
+	text-decoration: none;
+	color: black;
+	font-size: 19px;
+}
+.list_etc{
+	margin-top: 10px;
+
+}
+#gray{
+		font-size: 12px;
+	color: gray;
+}
+
+.list_price #price{
+	color: red;
+		font-size: 12px;
+		font-weight: bold;
+}
+
+.list_price #point{
+	color: blue;
+		font-size: 12px;
+		font-weight: bold;
+}
+
+.list_intro{
+	font-size: 13px;
+	margin-top: 10px;
+		text-overflow: ellipsis;
+	width:400px;
+	overflow:hidden;
+	white-space: nowrap;
+}
+.rating{
+	margin-top: 10px;
+	font-size: 13px;
+}
+
+.list_button{
+
+	height: 80%;
+	width: 20%;
+	float: left;
+
+
+}
+.list_button #btn_cart{
+	display: block;
+font-size: 13px;
+	background-color: #6482FF;
+	color: white;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: bold;
+	padding: 3px;
+	margin-top: 70px;
+	border: 0;
+	outline: 0;
+	height: 30px;
+}
+
+.list_button #btn_buy{
+	display: block;
+font-size: 13px;
+	margin-top: 10px;
+		background-color: #96A5FF;
+	color: white;
+		margin-left: auto;
+	margin-right: auto;
+	font-weight: bold;
+	width: 100px;
+	padding: 3px;
+
+	border: 0;
+	outline: 0;
+	height: 30px;
+}
+
+#blue{
+	font-size: 12px;
+	color: blue;
+}
+.order{
+	margin-top: 10px;
+}
+#catenamed{
+ 	font-size: 15px;
+ 	font-weight: bold;
+ 	
+}
+
+.nosearch{
+
+}
+#no_search{
+	font-size:30px;
+	font-weight:bold;
+}
+
+
+.search_nav{
+	margin-top: 20px;
+	width: 100%;
+	height: 150px;
+        border-bottom-style: solid ;
+                border-color: #8C8CFF;
+
+}
+
+.search1{
+	width: 100%;
+	height: 50px;
+    font-weight: bold;
+}
+.bookList_desc{
+	margin-top: 15px;
+	widows: 100%;
+	height: 80px;
+	text-align: center;
+	margin-bottom: 40px;
+        border-bottom-style: solid ;
+                border-color: #8C8CFF;
+}
+.bookList_desc span{
+	font-size: 30px;
+}
+.bookList_desc p{
+	display: block;
+	font-size: 13px;
+	margin-top: 10px;
+		}
+		
+		
+.jungo_nav{
+	width: 100%;
+	height: 70px;
+	border-bottom:  solid 2px #6e6e6e;
+
+}
+.jungo_nav_list li:not(:first-child){
+	list-style: none;	
+    float : left;
+    padding: 20px 15px 0 10px;
+    cursor: pointer;
+    font-weight: 900;
+
+}
+.jungo_nav_list li:first-child{
+	list-style: none;
+    float : left;
+    padding: 20px 15px 0 10px;
+    font-weight: 900;
+    cursor: pointer;
+    margin-left: 70px;
+    font-size: 20px;
+    margin-right:100px;
+
+
+
+}
+.jungo_nav_list li a{
+	text-decoration: none;
+	color:#6e6e6e;
+	}
+.jungo_nav_list li a:visited{
+	text-decoration: none;
+	color:#6e6e6e;
+	}
+
+#jungo_a{
+	display: inline-block;
+	margin-left: 15px;
+	color:#6e6e6e;
+}
+
+#jungo_desc{
+	display:inline-block;
+	margin-left:15px;
+	color:red;
+	font-weight:bold;
+}
+
+.view_content .view_area button{
+	font-size:26px;
+}

@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+/* 상세정보 상단 박스 */
+/* #book_top_box{
+	margin-bottom: 20px;
+	
+} */
+/*책 이미지 박스*/
+#book_img_box{
+	width:  25%;
+	height: 300px;
+	/* border: 1px solid blue;   */
+	margin-top: 30px;
+	margin-left: 30px;
+	float: left; 
+}
+
+/* 책 이미지 */
+img{
+	
+}
+/* 책 상세정보 전체 박스 */
+#detail_box{
+	 width: 60%; 
+	height: 300px;
+	margin: 0 auto;
+	float: left; 
+	/* border: 1px solid blue;   */
+	margin-top: 30px;
+	margin-left: 40px;
+	padding: 15px;
+
+}
+
+/* 책 정보 작은 박스  */
+#content_box{
+	padding: 20px 30px 0px 30px;
+}
+
+/* 판매가 */
+#sale{
+	font-size: 25px;
+}
+
+#sale_con{
+	font-size:25px;
+}
+/* 상세정보, 리뷰 리스트 */
+.tab_detail_content{
+	width: 100%;
+    height: 70px;
+    background-color: #6482FF;
+    float: left;
+    margin-top: 60px;
+    position: sticky;
+    top: 0px;
+}
+
+.tab_detail_content .list{
+	width: 100%;
+	float: right;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.tab_detail_content li{
+	float: left;
+	width: 33.3%;
+	line-height: 70px;
+}
+
+.tab_detail_content li a{
+	color:#545454;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: bold;
+	color:white;
+	margin-left: 10px;
+	display: block; /* a태그 정렬해주기 위해서 넣어줘야함 */
+	text-align: center;
+
+}
+.tab_detail_content li:last-child{
+	/*margin-right: 300px;*/
+}
+
+/* 버튼  */
+.styled {
+	margin: 0px 50px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight:bold;
+    text-align: center;
+    color: #fff;
+/*     text-shadow: 1px 1px 1px #000; */
+    /* border-radius: 5px; */
+    background-color: rgb(153, 165, 248);
+    /* background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .1),
+                                      rgba(0, 0, 0, .1) 30%,
+                                      rgba(0, 0, 0, 0)); */
+    /* box-shadow: inset 1px 1px 3px rgba(255, 255, 255, .6),
+                inset -1px -1px 3px rgba(0, 0, 0, .6); */
+}
+
+.styled:hover {
+    background-color: rgba(72, 156, 255, 1);
+}
+
+.styled:active {
+    box-shadow: inset -1px -1px 3px rgba(255, 255, 255, .6),
+                inset 1px 1px 3px rgba(0, 0, 0, .6);
+}
+
+/* 상세정보, 리뷰 내용 */
+.detail_content{
+	clear: left;
+}
+
+/* 환불 정보 */
+.refund_content{
+	height:auto;
+}
+
+/* 환불정보 테이블 */
+.box_detail_content{
+	padding:10px 15px 15px 15px;
+}
+
+.box_detail_table{
+	width:100%;
+}
+/* 회원리뷰 */
+#review_content{
+	padding:10px 15px 15px 15px;
+}
+
+/* 상세정보 */
+.info_content{
+	padding:10px 15px 15px 15px;
+}
+
+pre{
+	white-space: pre-wrap;
+	padding:20px;
+}
+
+/*평점*/
+#rateing{
+	width:25%;
+	float:right;
+}
+
+#main_box{
+	width:80%;
+	align:center;
+	margin:auto;
+}
+
+#btn_pay{
+margin: 0px -19px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: rgb(153, 165, 248);
+}

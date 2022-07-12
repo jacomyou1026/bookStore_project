@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JungoReplyMapper">
+
+<!-- 댓글 작성 -->
+<insert id="registReply">
+ insert into jungoreply (Jrno, JbookNum, JreplyContent,Id)
+     values (jungoreply_seq.NEXTVAL, #{JbookNum}, #{JreplyContent},#{Id})
+</insert>
+
+
+
+
+<!-- 댓글 리스트 -->
+<select id="replyList" resultType="vo.JungoReplyVO">
+    	select JbookNum, Id, Jrno, JreplyContent,JreplyRegdate
+    	 FROM jungoreply
+    	WHERE JbookNum = #{JbookNum}
+</select>
+
+<!-- 댓글 삭제 -->
+<delete id="deleteReply">
+ delete jungoreply
+     where Jrno = #{Jrno}
+          and Id = #{Id} 
+</delete>
+
+<!-- 아이디 체크 -->
+<select id="replyMemberIdCheck" resultType="String">
+ select Id
+  from jungoreply
+      where Jrno = #{Jrno}
+</select>
+
+
+<!-- 댓글 수정 -->
+<update id="modifyReply">
+ update jungoreply
+     set
+         JreplyContent = #{JreplyContent}
+     where Jrno = #{Jrno}
+         and Id = #{Id}
+</update>
+
+
+</mapper>

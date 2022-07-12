@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+h2{
+	margin:10px;
+}
+.rievew_all{
+	/* background-color: #c0c0c0; */
+	padding:5px;
+}
+.review_write_box{
+	align-content: center;
+	padding:10px 10px 30px 10px;
+	margin:15px;
+	background-color: #c0c0c0;
+}
+
+.review_write_box div textarea{
+	border:none;
+	width: 100%;
+	align:center;
+}
+
+.profile_box{
+	margin:10px;
+}
+.review_submit{
+	float:right;
+	padding: 0 20px;
+}
+.board_list{
+	list-style: none;
+	padding:10px;
+}
+.comment_wrap{
+	border-style: solid none;
+	border-width: 0px 0px 1px 0px;
+	border-color: gray;
+	min-height: 100px;
+	padding:10px 0px 50px 0px;
+}
+.id{
+	float: left;
+	width: 10%;
+}
+
+.date{
+	float:left;
+	width: 30%;
+}
+
+.time{
+	float:left;
+	width: 10%;
+}
+
+.rating{
+	float:left;
+	width: 50%;
+}
+
+#comment{
+	clear:left;
+	padding:10px 10px;
+}
+
+/* 댓글수정 textarea */
+#comment textarea{
+	border: 1px;
+	width: 100%;
+	align:center;
+}
+
+/* 아이디 span */
+#id_box{
+	float: left;
+}
+
+/*댓글달기 버튼*/
+.comment_btn{
+	float: right;
+}
+
+/*리뷰 dl 박스*/
+.review_dl{
+	height:auto;
+	/* position:relative; */
+}
+
+/* 버튼 크기 댓글달기, 댓글삭제, 댓글수정 */
+.review_dl dd input{
+	float: right;
+	margin:10px 10px;
+}
+
+/*대댓글 리뷰작성 박스*/
+.big_comment_wrap dl dd .star-rating{
+	 display:none; 
+}
+
+.big_comment_wrap dl dd .profile_box{
+	 padding:10px; 
+}
+
+.big_comment_wrap dl dd #id_box{
+	padding:0px 0px 10px 0px;
+}
+
+/*페이지 메뉴 이미지 */
+#pageMenu img{
+	text-align:center;
+	width: 15px;
+}
+
+/* .dd_btn{
+	position:absolute;
+} 
+
+댓글 수정 버튼
+#up_form_btn{
+	position:absolute;
+	left:950px;
+	z-index: -1;
+}
+
+댓글 삭제 버튼
+#delete_btn{
+	position:absolute;
+	left:1050px;
+	z-index: -1;
+}
+
+댓글 달기 버튼
+.dd_btn #comment_btn{
+	position:absolute;
+	left:1150px;
+	z-index: -1;
+} */

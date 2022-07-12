@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<select id="review_list" resultType="review" parameterType="java.util.HashMap">
+		<!-- select * from review order by regdate desc -->			
+			select * from 
+		(select RANK() OVER( order by ref desc, step asc) no, r.*
+			from (select * from review) r where bookNum = #{n})
+			where no between #{s} and #{e}
+	</select>
+
+	<!-- 전체 게시물의 수  -->
+	<select id="review_count" resultType="int" parameterType="int">
+		select count(*) from review where bookNum=#{num}
+	</select>
+	
+	<!-- 새글 insert -->
+	<insert id="review_insert" parameterType="review">
+		insert into review values(seq_review_idx.nextVal,
+									#{id},
+									#{content},
+									#{ip},
+									sysdate,
+									seq_review_idx.currVal,
+									0,
+									0,
+									#{bookNum},
+									#{rating})
+					
+	</insert>
+	
+	<!-- 평점 평균 가져오기 -->
+	<select id="review_avg" resultType="float">
+		select trunc(avg(rating)/10,1) from review 
+		where rating !=0 and
+			  bookNum=#{num}
+	</select>
+	
+	<!-- 기준 댓글 가져오기 -->
+	<select id="review_one" resultType="review" parameterType="int">
+		select * from review where reviewNum = #{reviewNum}
+	</select>
+	
+	<!-- 댓글처리를 위한 step + 1  -->
+	<update id="update_step" parameterType="review">
+		update review set step = step + 1 
+		where ref = #{ref} and step > #{step}
+	</update>
+	
+	<!-- 새댓글 추가 -->
+	<insert id="review_reply" parameterType="review">
+		insert into review values(seq_review_idx.nextVal,
+								#{id},
+								#{content},
+								#{ip},
+								sysdate,
+								#{ref},
+								#{step},
+								#{depth},
+								#{bookNum},
+								#{rating})
+	</insert>
+	
+	<!-- 리뷰 자손까지 모두 삭제  -->
+	<update id="review_delete_child" parameterType="int">
+		delete from review where ref=#{reviewNum}
+	</update>
+	
+	<!-- 리뷰 삭제  -->
+	<update id="review_delete" parameterType="int">
+		delete from review where reviewNum= #{reviewNum}
+	</update>
+	
+	<!-- 리뷰수정 -->
+	<update id="review_update" parameterType="review">
+		update review set content=#{content},
+						  regdate=sysdate
+		where reviewNum= #{reviewNum}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+

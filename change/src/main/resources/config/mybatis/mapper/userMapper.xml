@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="u">
+
+<insert id="user_insert" parameterType="vo.UserVO">
+	insert into book_user values( #{id},
+								  #{name},
+								  #{pwd},
+								  #{nickname},
+								  #{gender},
+								  #{jumin1},
+								  #{jumin2},
+								  #{postcode},
+								  #{address1},
+								  #{address2},
+								  #{email},
+								  0,
+								  0,
+								  #{tel1},
+								  #{tel2},
+								  #{tel3}
+								  )
+</insert>
+
+<!-- 로그인 -->
+<select id="user_login" resultType= "vo.UserVO" parameterType="String">
+	select * from book_user where id = #{id}
+</select>
+
+<!-- 아이디찾기, 회원가입 유무 체크 -->  
+<select id="user_search" resultType= "vo.UserVO" parameterType="String">
+	select * from book_user where name = #{name}
+</select>
+
+<!-- 회원정보 수정 -->
+<update id="user_update" parameterType="vo.UserVO">
+	update book_user set nickname = #{nickname}, 
+					tel1 = #{tel1}, 
+					tel2 = #{tel2}, 
+					tel3 = #{tel3}, 
+					postcode = #{postcode},
+					address1 = #{address1},
+					address2 = #{address2},
+					email = #{email}
+	where id = #{id}
+</update>
+
+<!-- 비밀번호 변경 -->
+<update id="user_adjust" parameterType="vo.UserVO">
+	update book_user set pwd = #{pwd} where id = #{id}
+</update>
+
+<delete id="delete" parameterType="String">
+  		delete from book_user where id = #{id}
+</delete>
+
+	<!--카카오페이  적립 -->
+	<update id="updateMoney" parameterType="vo.UserVO">
+		update book_user set money = money + #{account}  where id= #{id}  
+	</update>
+
+	<!--주문내역-->
+	<select id="Delivery" parameterType="string"  resultType= "vo.DeliveryVO">
+		SELECT * FROM VAM_ORDER where MEMBERID = #{id} ORDER BY ORDERDATE  DESC
+		
+	</select>
+	
+	<select id="board_count" resultType="int">
+		select COUNT(*) from VAM_ORDER 
+	</select>
+	
+
+	<!-- 게시글 전체목록 조회 -->
+	<select id="board_list" resultType="vo.DeliveryVO" parameterType="java.util.HashMap">
+			select * from  (select rownum no, r.*
+			from (select * from VAM_ORDER ORDER BY ORDERDATE  DESC) r )
+			where no between #{s} and #{e} AND memberid =#{id} 
+
+	</select>
+	
+	<select id="orderSelectOne" resultType="vo.DeliveryVO" parameterType="String">
+		SELECT * FROM VAM_ORDER vo  WHERE ORDERID =#{orderid}
+	</select>
+	
+	<select id="orderitemlist" resultType="vo.OrderItemDTO" parameterType="String">
+		SELECT  * FROM VAM_ORDERITEM  v JOIN book o ON v.BOOKNUM =o.BOOKNUM  and  ORDERID = #{orderid} 
+	</select>
+	
+	<select id="itemselectlist" resultType="vo.OrderItemDTO" parameterType="String">
+		SELECT * FROM VAM_ORDERITEM vo  WHERE ORDERID  IN (SELECT ORDERID  FROM VAM_ORDER vo WHERE ORDERID = #{itemid})
+	</select>
+	
+		<!--환불 사용 포인트 회수-->
+	<update id="salepayupdate" parameterType="vo.DeliveryVO">
+		update book_user set  shoppoint= shoppoint+#{usePoint} where id= #{id}  
+	</update>
+	
+		<!--환불 사용 포인트 회수-->
+	<update id="getpointudate" parameterType="vo.DeliveryVO">
+		update book_user set shoppoint=shoppoint-#{savePoint} where id= #{id}  
+	</update>
+	
+	
+		<!--환불 사용 포인트 회수-->
+	<update id="paybacks" parameterType="vo.DeliveryVO">
+		update book_user set  money=money + #{orderFinalSalePrice} where id= #{id}  
+	</update>
+	
+		<!--주문취소 상태변경-->
+	<update id="cancelupdate" parameterType="vo.DeliveryVO">
+		update VAM_ORDER set  orderstate= '주문취소' where orderId = #{orderId} and MEMBERID = #{id}  
+	</update>
+	
+		<!--주문완료 상태변경-->
+	<update id="ordersuescces" parameterType="String">
+		update VAM_ORDER set  orderstate= '주문완료' where orderid=#{orderid}
+	</update>
+	
+		<!--구매확정 상태변경-->
+	<update id="norefund" parameterType="String">
+		update VAM_ORDER set  orderstate= '구매확정' where orderid=#{orderid}
+	</update>
+	
+	
+
+	
+
+
+
+</mapper>
+
+
+
+
+
+ 
+
+
+
+
+
+

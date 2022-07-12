@@ -1,0 +1,250 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+/* 화면 전체 렙 */
+.wrapper{
+	width: 100%;
+}
+/* content 랩 */
+.wrap{
+	width : 100%;
+	margin: auto;
+}
+
+
+/* 로고, 검색, 로그인 */
+.top_area{
+	width: 100%;
+    height: 150px;
+    /* background-color: #f7f0b9; */
+}
+
+/* 홈페이지 기능 네비 */ 
+.nav{
+	width: 100%;
+    height: 50px;
+    position:relative;    
+}
+.nav .list{
+	position: absolute;
+    top: 0px;
+    right: 0;
+    
+}
+.nav .list li{
+	list-style: none;	
+    float : left;
+    padding: 13px 15px 0 10px;
+    font-weight: 900;
+    cursor: pointer;
+
+}
+.nav .list li a{
+	color:#A0A0FF;
+	text-decoration:none;
+}
+
+
+/* 로고 영역 */
+.logo_area{
+	width: 25%;
+	height: 100%;
+	float:left;
+	text-align: right;
+
+}
+.logo_area img{
+	height: 150px
+}
+
+
+/* 검색 박스 영역 */
+.search_area{
+	width: 50%;
+	height: 100%;
+	float:left;	
+}
+
+
+.search_select{
+	float: left;
+
+	width: 20%;
+	height: 100%;
+
+}
+#condition{
+	display: block;
+	width: 70px;
+	height: 45px;
+	margin-top: 50px;
+	margin-left:70px;
+}
+.search_content{
+	float: left;
+	width: 80%;
+	height: 100%;
+
+}
+.search_box{
+	margin-top: 50px;
+	width: 378px;
+	height: 45px;
+border: 1px solid #1b5ac2;
+
+}
+
+
+
+#keywordInput{
+	font-size: 16px;
+	width: 320px;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+	height : 43px;
+}
+
+#searchBtn{
+	width: 50px;
+	height: 43px;
+	border: 0px;
+	background :#6482FF;
+	outline: none;
+	float: right;
+	color: #ffffff;
+
+}
+/* 로그인 버튼 영역 */
+.login_area{
+	width: 25%;
+	height: 100%;
+	float:left;	
+}
+
+
+/* 책 카테고리 */
+.category_nav{
+	width: 100%;
+    height: 70px;
+    	background-color: #6482FF;
+}
+.category_nav .list{
+	float: right;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.category_nav li{
+	float: left;
+	margin-left: 50px;
+	line-height: 70px;
+
+}
+
+.category_nav li a{
+	color:#545454;
+	font-size: 20px;
+	font-weight: bold;
+	text-decoration: none;
+	font-weight: bold;
+	color:white;
+	margin-left: 10px;
+
+}
+.category_nav li:last-child{
+	margin-right: 500px;
+}
+
+
+
+/* 홈페이지 메인 제품 목록  */
+.content_area{
+	width: 100%;
+    height: 1900px;
+}
+
+
+
+/* footer navai 영역 */
+.footer_nav{
+	width:100%;
+	height:50px;
+
+}
+.footer_nav_container{
+	width: 100%;
+	height: 100%;
+	background-color:#969696;
+
+
+}
+.footer_nav_container>ul{
+	font-size: 12px;
+	float:left;
+	list-style:none;
+	position:relative;
+	line-height: 47px;
+	font-family: dotum;
+	margin-left: 10px;
+	color:white;
+	padding:0;
+	margin-top: 0;
+}
+.footer_nav_container>ul>li:first-child{
+	margin-left: 600px;
+	}
+
+.footer_nav_container>ul>li{
+	display:inline;
+	width: 45px;
+	height: 19px;
+	padding: 10px 9px 0 10px;
+}
+.footer_nav_container>ul>span{
+	margin: 0 4px;
+}
+/* footer 영역 */
+.footer{
+	width:100%;
+	height:100%;
+	background-color:#dcdcdc;
+	padding-bottom : 50px;
+	margin:0;
+	text-align: center;
+}
+.footer_container{
+	width: 100%;
+
+}
+
+.footer_left>img {
+	width: 200px;
+    height: 100px;
+}
+.footer_left{
+margin:0 auto; 
+	width: 200px;
+
+	
+}
+.footer_right{
+margin:0 auto; 
+	width: 680px;
+
+}
+
+
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
+
