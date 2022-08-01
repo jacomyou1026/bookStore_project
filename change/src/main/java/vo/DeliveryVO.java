@@ -50,7 +50,7 @@ public class DeliveryVO {
 	/* 배송비 */
 	private int deliveryCost;
 	
-	/* 사용 포인트 */
+	/* 샵포인트 */
 	private int shopPoint;
 	
 	/* 주문 날짜 */
@@ -67,6 +67,8 @@ public class DeliveryVO {
 	/* 최종 판매 비용 */
 	private int orderFinalSalePrice;
 	
+	private int paybackMoney; 
+	
     
 	
 
@@ -74,12 +76,13 @@ public class DeliveryVO {
 	@Override
 	public String toString() {
 		return "DeliveryVO [orderId=" + orderId + ", deliverytel1=" + deliverytel1 + ", deliverytel2=" + deliverytel2
-				+ ", deliverytel3=" + deliverytel3 + ", bookcnt=" + bookcnt + ", savePoint=" + savePoint + ", usePoint="
-				+ usePoint + ", addressee=" + addressee + ", id=" + id + ", memberAddr1=" + memberAddr1
-				+ ", memberAddr2=" + memberAddr2 + ", memberAddr3=" + memberAddr3 + ", orderState=" + orderState
-				+ ", orders=" + orders + ", deliveryCost=" + deliveryCost + ", shopPoint=" + shopPoint + ", orderDate="
-				+ orderDate + ", orderSalePrice=" + orderSalePrice + ", orderSavePoint=" + orderSavePoint
-				+ ", orderFinalSalePrice=" + orderFinalSalePrice + "]";
+				+ ", deliverytel3=" + deliverytel3 + ", bookcnt=" + bookcnt + ", passdate=" + passdate + ", shopnum="
+				+ shopnum + ", savePoint=" + savePoint + ", usePoint=" + usePoint + ", addressee=" + addressee + ", id="
+				+ id + ", memberAddr1=" + memberAddr1 + ", memberAddr2=" + memberAddr2 + ", memberAddr3=" + memberAddr3
+				+ ", orderState=" + orderState + ", orders=" + orders + ", deliveryCost=" + deliveryCost
+				+ ", shopPoint=" + shopPoint + ", orderDate=" + orderDate + ", orderSalePrice=" + orderSalePrice
+				+ ", orderSavePoint=" + orderSavePoint + ", orderFinalSalePrice=" + orderFinalSalePrice
+				+ ", paybackMoney=" + paybackMoney + "]";
 	}
 	
 	public void getOrderPriceInfo() {
@@ -95,6 +98,8 @@ public class DeliveryVO {
 			}
 		/* 최종 비용(상품 비용 + 배송비 - 사용 포인트) */
 			orderFinalSalePrice = orderSalePrice + deliveryCost- usePoint;
+			
+			paybackMoney = orderSalePrice + deliveryCost;
 			
 			//최종 비용에서 빼기
 			orderSavePoint = (int) (orderFinalSalePrice*0.1);

@@ -23,8 +23,13 @@
 		
 		<bean id="book_serviceBean" class="service.BookServiceImpl">
 			<constructor-arg ref="book_dao"/>
+		</bean>
+			
+		<bean id="user_serviceBean" class="service.UserServiceImpl">
+				<constructor-arg ref="user_dao"/>
 		</bean>	
 		
+
 		<bean id="jungobook_dao" class="dao.JungoBookDAOImpl">
 			<property name="sqlSession" ref="sqlSessionBean"/>	
 		</bean>

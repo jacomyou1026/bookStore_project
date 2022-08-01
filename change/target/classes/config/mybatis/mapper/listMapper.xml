@@ -122,14 +122,10 @@
             (select cateName from category where book.categoryNum = category.categoryNum) cateName,
             (select cateParent from category where book.categoryNum = category.categoryNum) cateParent
             from book where categoryNum >= 100000 and categoryNum < 300000 ]]><include refid="search"></include> )	
-            		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY bookNum DESC     
+            WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd} ORDER BY bookNum DESC     
                  
     </select> 
     
-    
-
-
 	
 	
 	   	<select id="CountNew" resultType="int" >
@@ -149,16 +145,6 @@
     </select>  
 	
  
-	
-	
-	
-	
-
-
-
-
-
-
 
 	<!--  베스트셀러 라인-->
 

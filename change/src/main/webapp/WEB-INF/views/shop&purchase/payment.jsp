@@ -151,13 +151,11 @@
 								return;
 							}
 
-							var finalTotalPrice =  	parseInt($(".finalpay").text());
-
-							console.log("최종원 : "+finalTotalPrice);
-
+							var finalTotalPrice = parseInt($(".finalpay").text());
+							
 
 
-							if (${user.money} <  finalTotalPrice ) {
+							if (${user.money} <  finalTotalPrice) {
 								alert('돈이 부족합니다.');
 								return;
 							}
@@ -166,6 +164,12 @@
 							if (!confirm("정말 결제하겠습니까?")) {
 								return;
 							}
+
+
+
+
+
+
 
 
 
@@ -259,12 +263,10 @@
 
 						//사용자 적립포인트 gk
 						var savepoint = document.getElementById("savepoint").innerText;
-						alert(savepoint);
 						var po = $(".savePoint").val(savepoint);
 						
 						//사용자 적립포인트 gk
 						var usePoint = document.getElementById("usePoint").innerText;
-						alert(usePoint);
 						var po2 = $(".usePoint").val(usePoint);
 						
 							// // //상품정보
@@ -607,14 +609,17 @@
 															value="${vo.shopnum}">
 														<input type="hidden" class="individual_booknum_input"
 															value="${vo.bookNum}">
-
 													</div>
 
 
 													<tr>
-														<td class="td_one"><img src="" alt=""> <!-- image -->
-															<span>${vo.subject }</span>
-															<!--상품이름  -->
+														<td class="td_one">
+															<div class="flexdiv"> 
+
+																<img src=${vo.img } alt=""> <!-- image -->
+																<!--상품이름  -->
+																<span class="booksubject">${vo.subject }</span>
+															</div>
 														</td>
 
 														<td>
@@ -685,7 +690,8 @@
 
 
 										<div class="box_radio_frame">
-											<label class="box-radio-input"><input type="radio" name="cp_item"
+											<label class="box-radio-input">
+												<input type="radio" name="cp_item"
 													value="5000"><span>5,000원</span></label>
 											<label class="box-radio-input"><input type="radio" name="cp_item"
 													value="10000"><span>10,000원</span></label>

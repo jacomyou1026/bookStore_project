@@ -98,18 +98,14 @@
 							} else {
 
 								deliveryPrice = 3000;
+								
 							}
+							$(".orderbtn").prop("disabled", false);
 						}else{
 							deliveryPrice = 0;
 							$(".orderbtn").prop("disabled", true);
-							return;
 							
 						}
-
-
-						console.log(totalPrice);
-						console.log("배송비 :" + deliveryPrice);
-
 
 
 
@@ -125,14 +121,11 @@
 						finalpoint = addpoint + point;
 						$(".finalpoint_span").text(finalpoint);
 
-						console.log("적립" + finalpoint);
 
 
 						var today = new Date();
 						var release_date = new Date(today.setDate(today.getDate() + 2));
 
-
-						console.log(release_date);
 
 						finalTotalPrice = totalPrice + deliveryPrice;
 
@@ -189,11 +182,11 @@
 							</h2>
 							<table style="width: 100%;">
 								<tr class="table_head" style="text-align: center;">
-									<td class="table_header_td">상품정보</td>
+									<td class="table_header_td" style="    width: 484px;">상품정보</td>
 									<td>판매가</td>
 									<td>수량</td>
 									<td>합계</td>
-									<td>배송일정</td>
+									<td style="    width: 228px;">배송일정</td>
 									<td>선택</td>
 								</tr>
 
@@ -235,17 +228,25 @@
 
 													<!-- img삽입 -->
 													<div class="table_felx1">
+														<div class="image_book" style="    margin-right: 15px;">
+															<img src=${vo.img} alt="">
+														</div>
+
 														<!-- <div style="margin-right: 23px;">${vo.img }</div> -->
 														<div class="table_felx2">
 															<div style="text-align: initial;">
-																<span class="Income">소득공제</span> <span
-																	class="free">무료배송</span>
+																<span class="Income">소득공제</span> 
 															</div>
 															<div style="margin-top: 12px;">
 																<!-- 국내도서인지 외국도서인지 카테고리에서 구분 -->
-																<span> <a class="book_name" style="color: black;"
-																		href="">[${vo.catename} 도서]${vo.subject}</a>
-																</span>
+																<div class="layoutname">
+																	<a class="book_name" style="color: black;"
+																		href="bookDetail.do?num=${vo.bookNum}">
+
+																		<span>[${vo.catename} 도서]</span><br>
+																		<span class="layoutsubject">${vo.subject}</span>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -361,15 +362,17 @@
 									${user.address1} ${user.address2}</span> <span class="releasedDate_span"
 									style="margin-left: 24px;"></span>
 							</div>
+							<div>
+								<span>
+									3만원 이상일 시 배송비 무료
+								</span>
+							</div>
 
 							<div style="display: flex; justify-content: space-around;">
 
 								<input class="orderbtn" type="button" value="주문하기" onclick="checkorder();">
-
-
 							</div>
 						</main>
-						</form>
 						<!-- 주문 form -->
 						<form action="purchase.do" method="get" class="order_form"></form>
 

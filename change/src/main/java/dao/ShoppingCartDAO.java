@@ -57,21 +57,6 @@ public class ShoppingCartDAO {
 	}
 	
 	
-//	//출고 날짜
-//	public List<String>regSelect() {
-//		List<String> relase =sqlSession.selectList("shopping.releaseBook");
-//		return relase; 
-//					
-//		}
-	
-//	/sksksk
-//	public int checkpay(OrderVO vo) {
-//		int payone= sqlSession.select("shopping.payone",vo);
-//		return payone;
-//		
-	
-	//}
-	
 	//바로구매(구매1) / 주문하기
 	public int orderone(OrderVO vo) {
 		int orderone= sqlSession.insert("shopping.payones",vo);
@@ -79,12 +64,6 @@ public class ShoppingCartDAO {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
 	
 	//장바구니에 담기
 		public int insert(ShoppingCartVO vo) {

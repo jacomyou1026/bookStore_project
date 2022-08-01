@@ -65,11 +65,13 @@ section{
     padding-left: 16px;
 }
  td{
-    padding: 16px 15px;
+    padding: 16px 10px;
+    border-collapse:collapse;
 }
 table{
     width: 100%;
     margin-top: 20px;
+    border-collapse:collapse;
 }
 .orderdiv{
     margin-right: 29px;
@@ -140,4 +142,8 @@ table{
     border: 5px solid #DC3545;
     font-weight: 700;
     border-radius: 44px;
+}
+.bookcontent{
+    margin-left: 19px;
+    place-self: center;
 }

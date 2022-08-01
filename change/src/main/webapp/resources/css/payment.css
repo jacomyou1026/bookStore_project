@@ -437,3 +437,12 @@ label>span{
 .box-radio-input:active{
 	background-color: #F0F8FF;
 }
+.flexdiv{
+	display: flex;
+}
+
+.booksubject{
+	place-self: center;
+    text-align: left;
+    margin-left: 30px;
+}

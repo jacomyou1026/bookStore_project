@@ -34,20 +34,6 @@
 	 }  
  
 
-	//  /* 수량버튼 */
-	// function cntup(){
-	// 	let quantity = $(this).parent("div").prev(input).find("input").val();
-	// 	$(this).parent("div").prev(input).find("input").val(++quantity);
-	// 	alert(quantity);
-
-	// }
-
-	// function cntdown(){
-	// let quantity =  $(this).parent("div").prev(input).find("input").val();
-	// if(quantity > 1){
-	// 	$(this).parent("div").prev(input).find("input").val(--quantity);		
-	// }}
-	 
    
 
 function changeCnt(cnt,num){
@@ -122,7 +108,6 @@ function changeResult(){
 		
 		//삭제하나
 		function delone(num){
-			alert(num);
 			
 			if(!confirm("삭제 하시겠습니까?")){
 				return;
@@ -148,10 +133,6 @@ function changeResult(){
 		}
 	 
 		function payone(f){
-			alert('${vo.shopnum}');
-			alert('${vo.id}');
-			
-
 			f.action = "payone.do";
 			f.submit();
 		}

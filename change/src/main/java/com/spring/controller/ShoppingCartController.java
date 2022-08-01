@@ -61,7 +61,7 @@ public class ShoppingCartController {
 	}
 	
 	//장바구니 insert
-	@RequestMapping(value= "shoppingCart_insert.do")
+	@RequestMapping(value= "/shoppingCart_insert.do")
 	public String shoppingCartInsert(int num, int bookNum) {
 		
 		String id = (String) session.getAttribute("id");
@@ -73,6 +73,7 @@ public class ShoppingCartController {
 
 		return "redirect:shoppingCart.do";
 	}
+	
 	
 	//장바구니 상세정보
 	@RequestMapping(value= "shoppingCart.do")

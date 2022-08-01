@@ -2,6 +2,7 @@ package dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -88,8 +89,8 @@ public class UserDAO{
 			return list;
 		}
 
-		public int rowTotal() {
-			int res = sqlSession.selectOne("u.board_count");
+		public int rowTotal(String id) {
+			int res = sqlSession.selectOne("u.board_count",id);
 			return res;
 		}
 
@@ -118,10 +119,7 @@ public class UserDAO{
 			return res;
 		}
 
-		public int getpointupdate(DeliveryVO orderlist) {
-			int res = sqlSession.update("u.getpointudate",orderlist);
-			return res;
-		}
+
 
 		public int paybacks(DeliveryVO orderlist) {
 			int res = sqlSession.update("u.paybacks",orderlist);
@@ -137,6 +135,7 @@ public class UserDAO{
 		public int ordersuescces(String orderid) {
 			int res = sqlSession.update("u.ordersuescces", orderid);
 			return res;
+			
 		}
 		 
 		//14일 후(구매 확정)
@@ -144,7 +143,47 @@ public class UserDAO{
 			int res = sqlSession.update("u.norefund", orderid);
 			return res;
 		}
-		
+
+		public int insertDB(Map<String, String> map) {
+			int res= sqlSession.insert("u.insertDB", map);
+			return res;
+		}
+
+		public List<DeliveryVO> todaybuy(String id) {
+			List<DeliveryVO> res = sqlSession.selectList("u.todaybuy",id);
+			return res;
+		}
+
+		public List<DeliveryVO> cancellist(HashMap map) {
+			List<DeliveryVO>  res = sqlSession.selectList("u.cancellist",map);
+			return res;
+		}
+
+		public int cacellistrowTotal(String id) {
+			int res = sqlSession.selectOne("u.cacellistrowTotal", id);
+			return res;
+		}
+
+		public int updaetzero(DeliveryVO orderlist) {
+			int res =sqlSession.update("u.updaetzero",orderlist);
+			return res;
+		}
+
+		//반품취소 포인트
+		public int cancelPoint(DeliveryVO orderlist) {
+			int res = sqlSession.update("u.cancelPoint",orderlist);
+			return res;
+		}
+
+		public int returnUpdate(DeliveryVO orderlist) {
+			int res = sqlSession.update("u.returnUpdate",orderlist);
+			return res;
+		}
+
+		public int returnmoney(DeliveryVO orderlist) {
+			int res = sqlSession.update("u.returnmoney",orderlist);
+			return res;
+		}
 		
 		
 		

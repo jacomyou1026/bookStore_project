@@ -122,8 +122,8 @@ function send(){
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">주문/배송조회</a>
-                        <a class="collapse-item" href="">취소/교환 반품조회</a>
+                        <a class="collapse-item" href="orderlist.do">주문/배송조회</a>
+                        <a class="collapse-item" href="cancellist.do">취소/교환 반품조회</a>
                         <div class="collapse-divider"></div>
                     </div>
                 </div>

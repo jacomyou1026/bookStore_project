@@ -112,6 +112,7 @@ public class OrderController {
 
 		System.out.println("id : " + id);
 
+
 		List<OrderItemDTO> ords = new ArrayList<>();
 
 		for (OrderItemDTO oit : v.getOrders()) {
@@ -150,7 +151,6 @@ public class OrderController {
 		delivert_vo.setId(v.getId());
 		delivert_vo.setMemberAddr3(v.getMemberAddr3());
 
-		System.out.println(delivert_vo.getDeliveryCost() + "배배ㅐㅂ소솟오옷옷오비비비");
 
 		System.out.println("delivert_vo 변경 : " + delivert_vo);
 
@@ -180,9 +180,29 @@ public class OrderController {
 		delivert_vo.setOrderFinalSalePrice(v.getOrderFinalSalePrice());
 		System.out.println(v.getOrderFinalSalePrice());
 		
+		
+		
+		delivert_vo.setId(id);
+	
+		
+		
+	
+		
 		System.out.println("v를 찾아서"+v);
 
 		int savepoint = v.getSavePoint();
+		
+		
+		System.out.println(savepoint);
+		
+		// point-usepoint+적립예정포인트(savepoint)
+		int usePoint = order_dao.usePoint(v);
+		System.out.println(usePoint+"usePoint");
+		
+		//책사기(money - salePrice)
+		int buy = order_dao.buybook(delivert_vo);
+		
+		//만약 usePoint가 음수가 된다면 0으로 대체
 
 		System.out.println("돈돈돈 : :" + vo.getTotalPrice());
 
@@ -196,10 +216,8 @@ public class OrderController {
 	public String content_page(Model model) {
 
 		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(sDate.format(new Date()));
 		String date = sDate.format(new Date());
 
-		System.out.println(delivert_vo);
 		List<OrderItemDTO> ords = new ArrayList<>();
 		OrderItemDTO orderItem = null;
 			for (OrderItemDTO oit : delivert_vo.getOrders()) {
@@ -219,14 +237,6 @@ public class OrderController {
 			delivert_vo.setOrders(ords);
 
 
-		System.out.println("벼벼벼변셩" + delivert_vo);
-		System.out.println("ords:" + ords);
-		System.out.println(orderItem);
-
-		System.out.println(delivert_vo.getDeliveryCost() + "배송비");
-
-		System.out.println(delivert_vo.getOrderFinalSalePrice() + "최종 원");
-
 		model.addAttribute("order", ords);
 		model.addAttribute("date", date);
 		model.addAttribute("delivery", delivert_vo);
@@ -234,49 +244,17 @@ public class OrderController {
 		return WEB_PATH + "detail_page.jsp";
 	}
 
-	@RequestMapping("chargePoint.do")
-	@ResponseBody
-	public String charge(int amount) {
-		String id = (String) session.getAttribute("id");
-		UserVO vo = new UserVO();
-		vo.setId(id);
-		vo.setAccount(amount);
-
-		System.out.println(vo.getAccount() + "충고");
-
-////		수정요함
-		int res = user_dao.insert_pay(vo);
-
-		System.out.println(res + "카카오페이");
-
-		String str = "no";// 안됨
-
-		if (res == 1) {
-			str = "yes";// 됨
-		}
-
-		return str;
-	}
-
 	@RequestMapping("/main.do")
 	public String main() {
 
 		String id = (String) session.getAttribute("id");
-		System.out.println(id);
-
 		delivert_vo.setId(id);
-		System.out.println("delivert_vo  : :" + delivert_vo);
-		System.out.println("나나나나 적금ㅂ허여향"+delivert_vo);
-//		savePoint 적립예정 넣기
-		int savepointimport = order_dao.savePoint(delivert_vo);
-		System.out.println(savepointimport);
-
-		int buy = order_dao.buybook(delivert_vo);
-
-		// 샵포인트에서 사용포인트 빼주기
-		int usePoint = order_dao.usePoint(delivert_vo);
-		System.out.println(usePoint);
 		
+		UserVO vo =user_dao.selectOne(id);
+		HttpSession session = request.getSession(); // 세션영역을 가져온다
+		session.setAttribute("point", vo.getShopPoint());
+		session.setAttribute("money", vo.getMoney());
+
 		return "/WEB-INF/views/main.jsp";
 	}
 

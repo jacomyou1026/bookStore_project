@@ -1,23 +1,34 @@
 package com.spring.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import dao.UserDAO;
-import util.CommonUser;
+import service.UserService;
+import util.Common;
 import util.PagingUser;
+import vo.BookVO;
 import vo.DeliveryVO;
 import vo.OrderItemDTO;
 import vo.UserVO;
@@ -29,6 +40,12 @@ public class UserController {
 
 	public void setUser_dao(UserDAO user_dao) {
 		this.user_dao = user_dao;
+	}
+
+	UserService userService;
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	DeliveryVO delvo;
@@ -186,95 +203,76 @@ public class UserController {
 
 	// 마이페이지
 	@RequestMapping("mypage.do")
-	public String mypage_form(String page, Model model) {
+	public String mypage_form(Model model) {
 
-		// 유저 정보
 		String id = (String) session.getAttribute("id");
-		
-		
 
-		int nowPage = 1;
-		if (page != null && !page.isEmpty()) {
-			nowPage = Integer.parseInt(page);
+		// 오늘 산 상품만 조회
+		List<DeliveryVO> vo = user_dao.todaybuy(id);
 
-		}
+		System.out.println(vo);
 
-		System.out.println("nowPage :  " + nowPage);
+		if (vo != null) {
+			model.addAttribute("vo", vo);
 
-		int start = (nowPage - 1) * CommonUser.Board.BLOCKLIST + 1;
-		int end = start + CommonUser.Board.BLOCKLIST - 1;
-
-		System.out.println(start + " : staty");
-		System.out.println(end + " : end");
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("s", start);
-		map.put("e", end);
-		map.put("id", id);
-
-		List<DeliveryVO> list = user_dao.select(map);
-		
-		System.out.println("충전 : "+list.get(0).getShopPoint());
-
-		int row_total = user_dao.rowTotal();
-
-		String pageMenu = PagingUser.getPaging("mypage.do", // 호출되는 페이지url
-				nowPage, // 현재 페이지 번호
-				row_total, // 전체 게시물 수
-				CommonUser.Board.BLOCKLIST, // 한페이지에 몇개 보여줄지
-				CommonUser.Board.BLOCKPAGE);
-
-		// 전체 달력리스트의 배송중인 것만 +7 지나고 배송 완료 주문상태로 변경 -
-		// update +14일 후 환불 불가
-
-		// 만약 7일 지났다면에 14일이 자났다면 체크
-
-		for (int i = 0; i < list.size(); i++) {
-			String orderid = list.get(i).getOrderId();
-			if (list.get(i).getOrderState().equals("배송준비") || list.get(i).getOrderState().equals("주문완료") ) {
-				System.out.println("원래 : " + list.get(i).getOrderState() + "-" + list.get(i).getOrderDate());
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-				// 구하려는 값
-				java.util.Date d1 = new java.util.Date();
-				// 7일 후
-				java.util.Date d2 = new java.util.Date(list.get(i).getOrderDate().getTime() + 7 * 1000 * 60 * 60 * 24);
-				// 14일 후
-				java.util.Date d3 = new java.util.Date(list.get(i).getOrderDate().getTime() + 14 * 1000 * 60 * 60 * 24);
-
-				
-				
-				String order = sdf.format(d1);
-				String seven = sdf.format(d2);
-				String forth = sdf.format(d3);
-				
-				if (d2.before(d1)) {
-					if (d3.before(d1)) {
-						//14일 지났으면
-						int norefund = user_dao.norefund(list.get(i).getOrderId());
-						System.out.println(norefund);
-					}else {
-						//7일 지났으면
-						int ordersuescces = user_dao.ordersuescces(list.get(i).getOrderId());
-
-					}
-				}
-
-			}
-		}
-		
-		System.out.println("change : " + list.get(0).getOrderState() + "-" + list.get(0).getOrderDate());
-		if (!list.isEmpty()) {
-			model.addAttribute("list", list);
-			model.addAttribute("pageMenu", pageMenu);// 하단 페이지 메뉴 바인딩
 		} else {
 			model.addAttribute("listCheck", "empty");
 		}
 
 		return WEB_PATH + "mypage.jsp";
+
 	}
 
-	// 아이디 찾기_이동
+	// 주문내역
+	@RequestMapping("orderlist.do")
+	public String orderlist(String page, Model model) {
+
+		// 유저 정보
+		String id = (String) session.getAttribute("id");
+
+		// page, 호출되는 페이지url,id
+		// 페이징 처리1
+		List<DeliveryVO> list = userService.pagging1(id, page, "orderlist.do");
+		System.out.println(list);
+		// 페이징 처리메뉴-2
+		String pageMenu = userService.pagging2(id, "orderlist.do");
+
+		// 전체 달력리스트의 배송중인 것만 +7 지나고 배송 완료 -> 주문상태로 변경 (환불가능)
+		// 14일 후 환불 불가
+
+		// 만약 7일 지났다면에 14일이 자났다면 체크
+		if (!list.isEmpty()) {
+			model.addAttribute("pageMenu", pageMenu);// 하단 페이지 메뉴 바인딩
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+
+		return WEB_PATH + "orderlist.jsp";
+	}
+
+	// 취소/교환 반품조회
+	@RequestMapping("cancellist.do")
+	public String cancelList(String page, Model model) {
+		String id = (String) session.getAttribute("id");
+
+		// user_dao.cancellist(map);
+		List<DeliveryVO> list = userService.pagging1(id, page, "cancellist.do");
+		System.out.println(list);
+
+		// 페이징 처리메뉴
+		String pageMenu = userService.pagging2(id, "cancellist.do");
+
+		if (!list.isEmpty()) {
+			model.addAttribute("pageMenu", pageMenu);// 하단 페이지 메뉴 바인딩
+			model.addAttribute("list", list);
+		} else {
+			model.addAttribute("listCheck", "empty");
+		}
+
+		return WEB_PATH + "cancellist.jsp";
+	}
+
 	@RequestMapping("openMyPage.do")
 	public String openMyPage_form(Model model, String orderId) {
 		System.out.println(orderId + " : orderid");
@@ -291,8 +289,6 @@ public class UserController {
 			ords.add(oit);
 		}
 
-		System.out.println(orderlist.getAddressee());
-
 		orderlist.setOrders(ords);
 		orderlist.getOrderPriceInfo();
 		System.out.println(orderlist);
@@ -303,59 +299,64 @@ public class UserController {
 		return WEB_PATH + "openMyPage.jsp";
 	}
 
-	@RequestMapping("refund.do")
+	@RequestMapping("payback.do")
 	@ResponseBody
-	public boolean refundone(DeliveryVO vo) {
+	public String refundone(DeliveryVO vo,@RequestParam("url") String url) {
 
 		String id = (String) session.getAttribute("id");
+		UserVO user = userService.selectOne(id);
+		
+		String res =  userService.payback(vo.getOrderId(), id, url);
+		
+		
+		System.out.println(vo.getShopPoint());
+		
 
-		List<OrderItemDTO> orderitemlist = user_dao.orderitemlist(vo.getOrderId());
-
-		System.out.println(orderitemlist);
-
-		DeliveryVO orderlist = user_dao.orderSelectOne(vo.getOrderId());
-
-		orderlist.setId(id);
-
-		List<OrderItemDTO> ords = new ArrayList<>();
-		for (OrderItemDTO oit : orderitemlist) {
-			oit.initSaleTotal();
-			ords.add(oit);
-		}
-
-		System.out.println(orderlist.getAddressee());
-
-		orderlist.setOrders(ords);
-		orderlist.getOrderPriceInfo();
-
-		System.out.println("orderlist : " + orderlist);
-
-		// 할인금액 -- 사용 포인트 원래대로 회수
-		// 받은 포인트 회수
-		// 주문 금액 을 교보코인으로 환불
-		boolean res = false;
-		// 사용포인트 회수하기
-		int salepay = user_dao.salpayupdate(orderlist);
-		System.out.println(salepay);
-		// 적립되었던 포인트 회수
-		int getpoint = user_dao.getpointupdate(orderlist);
-		System.out.println(getpoint);
-
-		System.out.println(orderlist.getId() + " : id");
-		// 상태정보 '주문취소'로 바뀌
-		int cancelupdate = user_dao.cancelupdate(orderlist);
-		System.out.println(cancelupdate);
-
-		// 주문 금액 교보코인에 화불
-		int paybacks = user_dao.paybacks(orderlist);
-		System.out.println(paybacks);
-
-		if (salepay == 1 && getpoint == 1 && paybacks == 1 && cancelupdate == 1) {
-			res = true;
-		}
+		HttpSession session = request.getSession(); // 세션영역을 가져온다
+		session.setAttribute("point", user.getShopPoint());
+		session.setAttribute("money", user.getMoney());
 		System.out.println(res + "결과");
 		return res;
 	}
+	
+
+	@RequestMapping("chargePoint.do")
+	@ResponseBody
+	public String charge(int amount) {
+		String id = (String) session.getAttribute("id");
+		
+		UserVO vo = new UserVO();
+		
+		
+		vo.setId(id);
+		vo.setAccount(amount);
+		
+		System.out.println(amount+"돈돈돈돈");
+		
+
+		System.out.println(vo.getAccount() + "충고");
+		
+		int res = user_dao.insert_pay(vo);
+		System.out.println(res);
+		
+		UserVO user = userService.selectOne(id);
+
+		System.out.println(res + "카카오페이");
+		System.out.println(amount+"돈 - 해수");
+		
+		HttpSession session = request.getSession(); // 세션영역을 가져온다
+		session.setAttribute("money", user.getMoney());
+
+		String str = "no";// 안됨
+
+		if (res == 1) {
+			str = "yes";// 됨
+		}
+
+		return str;
+	}
+
+	
 
 	// 아이디 찾기_이동
 	@RequestMapping("search_id.do")
@@ -368,7 +369,6 @@ public class UserController {
 	public String search_id(Model model, String name, String email, String tel) {
 		String tel2 = tel.substring(3, 7);
 		String tel3 = tel.substring(tel.length() - 4, tel.length());
-		;
 
 		UserVO vo = user_dao.selectOne_search(name);
 		model.addAttribute("msg", "이름, 이메일, 전화번를 올바르게 입력하세요");
@@ -571,6 +571,46 @@ public class UserController {
 	@RequestMapping("/mainpage.do")
 	public String mainpage() {
 		return WEB_PATH + "main.jsp";
+	}
+
+//	DB insert
+	@RequestMapping("insertbook.do")
+	public String insertbook() throws ParserConfigurationException, SAXException, IOException {
+		String name = "https://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbjacomyou10262248001&QueryType=ItemNewAll&MaxResults=25&start=1&SearchTarget=Book&output=xml&Version=20131101&CategoryId=51300";
+		StringBuilder urlBuilder = new StringBuilder(name);
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = builderFactory.newDocumentBuilder();
+		Document doc = builder.parse(urlBuilder.toString());
+
+		System.setProperty("https.protocols", "TLSv1.2");
+		doc.normalize();
+		// author,pudate,er,price,intro,stock,img,
+		NodeList bookitem = doc.getElementsByTagName("item");
+		Map<String, String> map = new HashMap<String, String>();
+		for (int i = 0; i < bookitem.getLength(); i++) {
+			NodeList childNodes = bookitem.item(i).getChildNodes();
+			for (int j = 0; j < childNodes.getLength(); j++) {
+				switch (childNodes.item(j).getNodeName()) {
+				case "author":
+				case "title":
+				case "pubDate":
+				case "publisher":
+				case "priceStandard":
+				case "description":
+				case "cover":
+					// System.out.println(childNodes.item(j).getNodeName() + "-" +
+					// childNodes.item(j).getTextContent());
+					map.put(childNodes.item(j).getNodeName(), childNodes.item(j).getTextContent());
+				}
+			}
+			System.out.println("map" + map.get("author") + "/" + map.get("pubDate") + "/" + map.get("publisher"));
+			int res = user_dao.insertDB(map);
+			System.out.println(res);
+			// map.clear();
+		}
+		map.clear();
+
+		return "redirect:main";
 	}
 
 }

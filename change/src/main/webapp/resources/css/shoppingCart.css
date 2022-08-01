@@ -177,4 +177,6 @@ header {
     font-weight: bold;
     margin-top: 31px;
 }
-}
+ .layoutname{
+    text-align: start;
+} 

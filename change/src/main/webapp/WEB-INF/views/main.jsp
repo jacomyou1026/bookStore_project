@@ -139,7 +139,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[0].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[0].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[0].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -148,7 +148,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[1].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[1].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[1].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -157,7 +157,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[2].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[2].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[2].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -166,7 +166,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[3].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[3].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[3].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -175,7 +175,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[4].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[4].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[4].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -184,7 +184,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[5].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[5].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[5].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -193,7 +193,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[6].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[6].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[6].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 			
@@ -202,7 +202,7 @@
 				<div class="card-body">
 					<h4 class="card-title" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[7].subject}</h4><!-- 책 제목 -->
 					<p class="card-text" style="height:40px; overflow:hidden; 	white-space: nowrap; text-overflow: ellipsis;">${list[7].intro}</p> <!-- 책 내용 -->
-					<a href="#" class="btn btn-primary">책 보러가기</a>
+					<a href="bookDetail.do?num=${list[7].bookNum}" class="btn btn-primary">책 보러가기</a>
 				</div>
 			</div>
 	

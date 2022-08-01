@@ -214,10 +214,11 @@
                                 주문 내역
                             </div>
                             <div class=orderdiv>
-                                <table border="1px">
+                                <table border="1px" cellspacing="0" style="border-collapse:collapse;">
                                     <tr>
-                                        <td style="padding-right: 168px;">상품정보</td>
-                                        <td style="    padding-right: 0px; text-align: center; padding-left: 0;
+                                        <td style="width: 395px;">상품정보</td>
+                                        <td style="text-align: center; width: 23px;">가격</td>
+                                        <td style=" text-align: center;
         
                                            ">배송비</td>
                                         <td style="    padding-right: 0px;
@@ -234,20 +235,38 @@
                                                 <input type="hidden" class="bookprice" value="${vo.price}"><br>
                                             </div>
                                             <tr class="tr_back">
-                                                <td>
-                                                    <span>${vo.booknum}</span>
-                                                    <span> ${vo.subject}</span>
-                                                    <span class="prices"> ${vo.price}</span>
-                                                    <span> ${vo.author}</span>
-                                                    <span> ${vo.bookcnt}</span>
-                                                    <span> ${vo.publisher}</span>
-                                                    <span>
-                                                        <fmt:formatDate pattern="yyyy-MM-dd"
+                                                <td style="
+                                                display: flex;
+                                                border: none;
+                                                border-bottom: 1px solid ;
+                                            ">
+                                                    <div>
+                                                        <span>
+                                                            <img src=${vo.img} alt="">
+                                                        </span>
+                                                    </div>
+                                                    <div class="bookcontent">
+
+                                                        <span> ${vo.subject}</span>
+                                                        <div>
+                                                            <span> ${vo.author}</span>
+                                                        </div>
+                                                        <div>
+                                                            <span> ${vo.bookcnt}</span>
+                                                            <span>권</span> 
+                                                        </div>
+                                                        <span>출판일 : </span><span> ${vo.publisher}</span>
+                                                        <span>
+                                                            <fmt:formatDate pattern="yyyy-MM-dd"
                                                             value="${vo.publishdate}" />
-                                                    </span>
+                                                        </span>
+                                                    </div>
 
                                                 </td>
                                         </div>
+                                        <td style="    text-align: center;">
+                                            <span class="prices"> ${vo.price}</span>
+                                        </td>
                                         <td class="orderdel" style="text-align: center;">
                                             ${order.deliveryCost}</td>
                                         <td class="orderstate" style="text-align: center;">

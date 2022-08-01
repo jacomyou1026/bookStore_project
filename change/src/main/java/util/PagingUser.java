@@ -5,7 +5,7 @@ package util;
         blockList:한페이지당 게시물수
         blockPage:한화면에 나타낼 페이지 메뉴 수
  */
-public class PagingUser {
+public class  PagingUser{
 	public static String getPaging(String pageURL,int nowPage, int rowTotal,int blockList, int blockPage){
 		
 		int totalPage/*전체페이지수*/,
@@ -49,10 +49,10 @@ public class PagingUser {
 			sb.append("<a href ='"+pageURL+"?page=");
 			//sb.append(nowPage - blockPage);
 			sb.append( startPage-1 );
-			sb.append("'><img src='/resources/page_img/btn_prev.gif'></a>");
+			sb.append("'><img src='/SpringBoar/resources/img/btn_prev.gif'></a>");
 		}
 		else
-			sb.append("<img src='/resources/page_img/btn_prev.gif'>");
+			sb.append("<img src='/SpringBoar/resources/img/btn_prev.gif'>");
 		
 //------페이지 목록 출력 -------------------------------------------------------------------------------------------------
 		//sb.append("|");
@@ -83,10 +83,10 @@ public class PagingUser {
 			else
 				nowPage = nowPage+blockPage;
 			sb.append(nowPage);*/
-			sb.append("'><img src='/resources/page_img/btn_next.gif'></a>");
+			sb.append("'><img src='/SpringBoar/resources/img/btn_next.gif'></a>");
 		}
 		else
-			sb.append("<img src='/resources/page_img/btn_next.gif'>");
+			sb.append("<img src='/SpringBoar/resources/img/btn_next.gif'>");
 //---------------------------------------------------------------------------------------------------------------------	    
 
 		return sb.toString();

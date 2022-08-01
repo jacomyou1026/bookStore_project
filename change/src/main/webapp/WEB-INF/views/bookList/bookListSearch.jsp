@@ -87,16 +87,16 @@
 							<div class="col-md-offset-3">
 						<ul class="pagination">
 							<c:if test="${pc.prev}">
-								<li><a href="bookListSearch?page=${pc.startPage - 1}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">이전</a></li>
+								<li><a href="/bookListSearch?page=${pc.startPage - 1}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">이전</a></li>
 							</c:if> 
 							
 							<c:forEach begin="${pc.startPage}" end="${pc.endPage}" var="idx">
 								<li <c:out value="${pc.paging.page == idx ? 'class=active' : ''}" />>
-								<a href="bookListSearch?page=${idx}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">${idx}</a></li>
+								<a href="/bookListSearch?page=${idx}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">${idx}</a></li>
 							</c:forEach>
 							
 							<c:if test="${pc.next && pc.endPage > 0}">
-								<li><a href="bookListSearch?page=${pc.endPage + 1}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">다음</a></li>
+								<li><a href="/bookListSearch?page=${pc.endPage + 1}&countPerPage=${pc.paging.countPerPage}&keyword=${param.keyword}&condition=${param.condition}">다음</a></li>
 							</c:if> 
 						</ul>
 					</div>

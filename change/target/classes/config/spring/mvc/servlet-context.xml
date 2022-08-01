@@ -65,6 +65,7 @@
 	
 	 <beans:bean class="com.spring.controller.UserController"> 
 		<beans:property name="user_dao" ref="user_dao"/>
+		<beans:property name="userService" ref="user_serviceBean"/>
 	</beans:bean> 	
 	
 	

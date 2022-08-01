@@ -15,7 +15,7 @@
 			
 	
 				<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="resources/css/bookList/bookList.css">
+<link rel="stylesheet" href="${ pageContext.request.contextPath }/resources/css/bookList/bookList.css">
 <script>
 function shopping_basket(bookNum){
 	  var num = 1;

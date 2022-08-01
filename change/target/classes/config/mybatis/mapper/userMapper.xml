@@ -67,8 +67,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
-	<select id="board_count" resultType="int">
-		select COUNT(*) from VAM_ORDER 
+	<select id="board_count" resultType="int" parameterType="String">
+		select COUNT(*) from VAM_ORDER where memberid =#{id}
 	</select>
 	
 
@@ -92,20 +92,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM VAM_ORDERITEM vo  WHERE ORDERID  IN (SELECT ORDERID  FROM VAM_ORDER vo WHERE ORDERID = #{itemid})
 	</select>
 	
-		<!--환불 사용 포인트 회수-->
+		<!--사용 포인트했던 포인트 복구-->
 	<update id="salepayupdate" parameterType="vo.DeliveryVO">
-		update book_user set  shoppoint= shoppoint+#{usePoint} where id= #{id}  
+		update book_user set  shoppoint= shoppoint+#{usePoint}-#{savePoint} where id= #{id}  
 	</update>
 	
-		<!--환불 사용 포인트 회수-->
-	<update id="getpointudate" parameterType="vo.DeliveryVO">
-		update book_user set shoppoint=shoppoint-#{savePoint} where id= #{id}  
+		<!--반품취소 포인트 -->
+	<update id="cancelPoint" parameterType="vo.DeliveryVO">
+		update book_user set  shoppoint= shoppoint + #{savePoint} - #{usePoint} where id= #{id}  
 	</update>
 	
+	<!--사용포인트가 음수라면 0으로 변경-->
+	<update id="updaetzero" parameterType="vo.DeliveryVO">
+		update book_user set  shoppoint= 0 where id = #{id} 
+	</update>
 	
-		<!--환불 사용 포인트 회수-->
+		<!--환불 가격 money에 넣기-->
 	<update id="paybacks" parameterType="vo.DeliveryVO">
-		update book_user set  money=money + #{orderFinalSalePrice} where id= #{id}  
+		update book_user set  money=money + #{paybackMoney} where id= #{id}  
 	</update>
 	
 		<!--주문취소 상태변경-->
@@ -123,10 +127,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update VAM_ORDER set  orderstate= '구매확정' where orderid=#{orderid}
 	</update>
 	
+
+	<insert id="insertDB" parameterType="java.util.HashMap" >
+		insert into book(booknum,subject,author,PUBLISHDATE,PUBLISHER,PRICE,INTRO,STOCK,IMG,CATEGORYNUM,BESTCK)
+		 values(BOOKSEQ.NEXTVAL,#{title},#{author},TO_DATE(#{pubDate},'YYYY-MM-DD'),#{publisher},#{priceStandard},#{description},100,#{cover},101005,0)
+	</insert>
+	
+	<!--오늘 산 책 조회  -->
+	<select id="todaybuy" parameterType="String" resultType="vo.DeliveryVO">
+	SELECT * FROM VAM_ORDER vo WHERE TO_CHAR(ORDERDATE , 'YYYY-MM-DD') = TO_CHAR(CURRENT_DATE,'YYYY-MM-DD') and MEMBERID =#{id} ORDER BY ORDERSTATE 
+	</select>
+	
+	<!--주문취소 조회-->
+	<select id="cancellist" parameterType="java.util.HashMap" resultType="vo.DeliveryVO">
+			select * from  (select rownum no, r.*
+			from (SELECT * FROM VAM_ORDER vo WHERE ORDERSTATE ='주문취소' ORDER BY ORDERDATE DESC ) r )
+			where no between #{s} and #{e} AND memberid =#{id} 	
+	</select>
+	
+	<!-- 주문취소리스트 rowTotal -->
+	<select id="cacellistrowTotal" parameterType="String" resultType="int">
+	select COUNT(*) from VAM_ORDER where memberid =#{id} AND ORDERSTATE ='주문취소'
+	</select>
+	
+	
+	
+	<!--반품취소로 변경  -->
+	<update id="returnUpdate" parameterType="String">
+		update VAM_ORDER set  orderstate= '반품취소' where orderid=#{orderId}
+	</update>
+	
+	<!--반품취소  -  money 빼기-->
+	<update id="returnmoney" parameterType="vo.DeliveryVO">
+		update book_user set  money=money - #{paybackMoney} where id= #{id}  
+	</update>
+	
 	
 
 	
-
 
 
 </mapper>
@@ -135,7 +173,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
- 
+
 
 
 

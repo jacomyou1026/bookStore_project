@@ -71,7 +71,11 @@
 				return;
 			 }
 			 
-			location.href = "purchase.do?orders%5B0%5D.bookNum="+bookNum+"&orders%5B0%5D.bookCnt="+num;
+		//	location.href = "purchase.do?orders%5B0%5D.bookNum="+bookNum+"&orders%5B0%5D.bookCnt="+num;
+		var booknum = 'orders[0].bookNum';
+		var bookCnt = 'orders[0].bookCnt';
+		location.href = "purchase.do?"+encodeURIComponent(booknum)+"="+bookNum+"&"+encodeURIComponent(bookCnt)+"="+num;
+
     	}
 		
   }

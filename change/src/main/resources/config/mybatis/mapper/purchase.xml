@@ -33,16 +33,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM SHOPPING_CART WHERE shopnum =#{vo}  
 	</delete>
 	
-	<update id="savepoint" parameterType="vo.DeliveryVO">
-		update BOOK_USER set shoppoint = shoppoint + #{orderSavePoint} where id = #{id} 
-	</update>
-	
 	<update id="buybook" parameterType="vo.DeliveryVO">
-		update BOOK_USER set Money = money-#{orderSavePoint} where id = #{id}
+		update BOOK_USER set Money = money-#{orderSalePrice} where id = #{id}
 	</update>
 	
 	<update id="usePoint" parameterType="vo.DeliveryVO">
-		update BOOK_USER set shoppoint= shoppoint-#{usePoint} where id = #{id}
+		update BOOK_USER set shoppoint= shoppoint - #{usePoint} + #{savePoint} where id = #{id}
 	</update>
 	
 		

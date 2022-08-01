@@ -6,6 +6,20 @@ public class OrderItemDTO {
 	
 	private String orderId;
 	
+	private String img;
+	
+	
+	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
+
 	/* 상품 번호 */
     private int booknum;
     
@@ -175,11 +189,11 @@ public class OrderItemDTO {
 
 	@Override
 	public String toString() {
-		return "OrderItemDTO [orderId=" + orderId + ", booknum=" + booknum + ", bookcnt=" + bookcnt + ", orderItemId="
-				+ orderItemId + ", price=" + price + ", bookDiscount=" + bookDiscount + ", salePrice=" + salePrice
-				+ ", totalPrice=" + totalPrice + ", shopnum=" + shopnum + ", totalSavePoint=" + totalSavePoint
-				+ ", author=" + author + ", publishdate=" + publishdate + ", publisher=" + publisher + ", subject="
-				+ subject + "]";
+		return "OrderItemDTO [orderId=" + orderId + ", img=" + img + ", booknum=" + booknum + ", bookcnt=" + bookcnt
+				+ ", orderItemId=" + orderItemId + ", price=" + price + ", bookDiscount=" + bookDiscount
+				+ ", salePrice=" + salePrice + ", totalPrice=" + totalPrice + ", shopnum=" + shopnum
+				+ ", totalSavePoint=" + totalSavePoint + ", author=" + author + ", publishdate=" + publishdate
+				+ ", publisher=" + publisher + ", subject=" + subject + "]";
 	}
 	
 	
