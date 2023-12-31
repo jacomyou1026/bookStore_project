@@ -1,6 +1,7 @@
 # bookStore-Spring
 
 # 서점 만들어보기
+- 팀프로젝트 ( 백엔드 4명)
 
 ### 개발환경
 - `JAVA`
@@ -15,6 +16,9 @@
 - **프로젝트 주제** : 책을 판매하고 중고 서적을 판매하는 사이트
 - **프로젝트 목적** : 교보서적, 알라딘같은 온라인 서점을 만들어 프론트, 백엔드를 다루기
 - **기대효과** : 과정에서 학습한 내용을 바탕으로, 웹개발 프로젝트를 하는 과정에서 다양한 툴을 활용해보며 실력을 키워나갈 수 있다.
+
+### ERD 설계
+![s](https://github.com/jacomyou1026/bookStore_project/assets/70208747/a7b4be1b-40d0-4d2b-9cf4-56ce91b0b876)
 
 ### 구현프로젝트 설명 
 - **메인 페이지** 
@@ -34,6 +38,9 @@
 
 
 ---
+project PPT
+[bookStore_project.pptx](https://github.com/jacomyou1026/bookStore_project/files/13800877/bookStore_project.pptx)
+
 # 개발 스크린샷
 
 <img width="947" alt="메인페이지" src="https://github.com/jacomyou1026/bookStore-Spring-/assets/70208747/3ddd21d7-f238-4c90-b703-4b0d52322d0d">
