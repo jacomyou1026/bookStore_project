@@ -5,9 +5,11 @@
 ### 개발환경
 - `JAVA`
 - `JDK1.8`
-- **Framework** :  Eclipse
+- jsp
+- **Framework** :  Eclipse, Spring Framework
 - **Database**  : Oracle DB(11xe)
 - **ORM** : Mybatis
+
 
 ### 프로젝트 설명
 - **프로젝트 주제** : 책을 판매하고 중고 서적을 판매하는 사이트
