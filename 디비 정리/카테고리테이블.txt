@@ -1,8 +1,0 @@
-create table category(
-    tier number(1) not null,
-    cateName varchar2(30) not null,
-    categoryNum int not null,
-    cateParent int ,
-    primary key(categoryNum),
-    foreign key(cateParent) references category(categoryNum) 
-);
