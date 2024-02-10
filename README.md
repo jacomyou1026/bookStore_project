@@ -1,9 +1,15 @@
-# bookStore-Spring
+<div align="center">
 
-# 서점 만들어보기
-- 팀프로젝트 ( 백엔드 4명)
+###  bookStore-Spring
+책을 판매하고 중고 책을 판매하는 플랫폼
+</div>
 
-### 개발환경
+ ## 프로젝트 설명  
+ - 책을 판매하고 중고 책을 판매하는 플랫폼.
+ - 온라인으로 책을 살 수 있으며, 동시에 사용자들이 중고 책을 거래할 수 있어 편리성을 제공해준다.
+
+
+## 기술 스택
 - `JAVA`
 - `JDK1.8`
 - jsp
@@ -11,15 +17,18 @@
 - **Database**  : Oracle DB(11xe)
 - **ORM** : Mybatis
 
+### 백엔드
+![image](https://github.com/jacomyou1026/bookStore_project/assets/70208747/ce580afd-cae0-4d21-9b13-3d261ba19cc7)
 
-### 프로젝트 설명
-- **프로젝트 주제** : 책을 판매하고 중고 서적을 판매하는 사이트
-- **프로젝트 목적** : 교보서적, 알라딘같은 온라인 서점을 만들어 프론트, 백엔드를 다루기
-- **기대효과** : 과정에서 학습한 내용을 바탕으로, 웹개발 프로젝트를 하는 과정에서 다양한 툴을 활용해보며 실력을 키워나갈 수 있다.
 
-### ERD 설계
-![s](https://github.com/jacomyou1026/bookStore_project/assets/70208747/a7b4be1b-40d0-4d2b-9cf4-56ce91b0b876)
+### 프론트엔드
+![image](https://github.com/jacomyou1026/bookStore_project/assets/70208747/0a2d330b-a93e-4ca6-94b2-a4e6406fe7ed)
 
+
+
+## ERD 설계
+
+<img  align="center" width="400" alt="erd" src="https://github.com/jacomyou1026/bookStore_project/assets/70208747/a7b4be1b-40d0-4d2b-9cf4-56ce91b0b876">
 
 ### 구현프로젝트 설명 
 메인 페이지** 
@@ -90,7 +99,5 @@
 ---
 project PPT
 [bookStore_project.pptx](https://github.com/jacomyou1026/bookStore_project/files/13800877/bookStore_project.pptx)
-
-# 개발 스크린샷
 
 
