@@ -31,8 +31,9 @@
 <img  align="center" width="400" alt="erd" src="https://github.com/jacomyou1026/bookStore_project/assets/70208747/a7b4be1b-40d0-4d2b-9cf4-56ce91b0b876">
 
 ### 구현프로젝트 설명 
-메인 페이지** 
- : 부트스트랩의 케러셀을 이용하였고 카드를 사용해 책의 이미지와 정보 그리고 책의 상세페이지에 들어갈수 있다. 상단은 세션값을 사용해 로그인이 되어있지않으면 회원가입을 띄우고 로그인이 되어있다면 로그아웃, 마이페이지등을 띄운다.
+### 메인 페이지
+부트스트랩의 케러셀을 이용하였고 카드를 사용해 책의 이미지와 정보 그리고 책의 상세페이지에 들어갈수 있다. 상단은 세션값을 사용해 로그인이 되어있지않으면 회원가입을 띄우고 로그인이 되어있다면 로그아웃, 마이페이지등을 띄운다.
+
 <img  align="center" width="300" alt="로그인 후 마이페이지" src="https://github.com/jacomyou1026/bookStore_project/assets/70208747/18b14cea-0b49-4c08-b0da-145e7cd0a974">
 
 
